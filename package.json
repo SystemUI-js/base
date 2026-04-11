@@ -1,15 +1,38 @@
 {
-  "name": "base-feature-init",
-  "private": true,
+  "name": "@system-ui-js/base",
   "version": "0.1.0",
+  "description": "System UI 基础包与 Window Demo 展示站",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "vite --config vite.config.ts",
+    "dev:demo": "vite --config vite.config.ts",
+    "build": "npm run build:lib && npm run build:demo",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:demo": "tsc -p tsconfig.app.json && vite build --config vite.config.ts",
+    "preview:demo": "vite preview --config vite.config.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@system-ui-js/chameleon": "0.2.0"
+  },
+  "peerDependencies": {
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
@@ -25,6 +48,8 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "prettier": "^3.8.2",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
     "vite": "^8.0.8"
