@@ -10,7 +10,7 @@ Start a new change using the experimental artifact-driven approach.
 
 1. **If no input provided, ask what they want to build**
 
-   Use the **AskUserQuestion tool** (open-ended, no preset options) to ask:
+   Use the **question tool** (open-ended, no preset options) to ask:
 
    > "What change do you want to work on? Describe what you want to build or fix."
 

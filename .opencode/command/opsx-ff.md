@@ -10,7 +10,7 @@ Fast-forward through artifact creation - generate everything needed to start imp
 
 1. **If no input provided, ask what they want to build**
 
-   Use the **AskUserQuestion tool** (open-ended, no preset options) to ask:
+   Use the **question tool** (open-ended, no preset options) to ask:
 
    > "What change do you want to work on? Describe what you want to build or fix."
 
@@ -38,7 +38,7 @@ Fast-forward through artifact creation - generate everything needed to start imp
 
 4. **Create artifacts in sequence until apply-ready**
 
-   Use the **TodoWrite tool** to track progress through the artifacts.
+   Use the **todowrite tool** to track progress through the artifacts.
 
    Loop through artifacts in dependency order (artifacts with no pending dependencies first):
 
@@ -65,7 +65,7 @@ Fast-forward through artifact creation - generate everything needed to start imp
    - Stop when all `applyRequires` artifacts are done
 
    c. **If an artifact requires user input** (unclear context):
-   - Use **AskUserQuestion tool** to clarify
+   - Use the **question tool** to clarify
    - Then continue with creation
 
 5. **Show final status**

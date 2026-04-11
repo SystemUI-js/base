@@ -6,16 +6,19 @@ export {
   BaseWindowActionButton,
   BaseWindowBody,
   BaseWindowTitle,
-  DEFAULT_WINDOW_THEME_CLASS_NAME,
-  WINDOW_THEME_CLASS_NAMES,
 } from './window';
 
+export {
+  DEFAULT_WINDOW_THEME_CLASS_NAME,
+  WINDOW_THEME_CLASS_NAMES,
+} from './window-theme';
+
 export type {
-  BaseThemeName,
-  BaseThemeToken,
   BaseThemeProviderProps,
   BaseWindowActionButtonProps,
   BaseWindowBodyProps,
   BaseWindowProps,
   BaseWindowTitleProps,
 } from './window';
+
+export type { BaseThemeName, BaseThemeToken } from './window-theme';

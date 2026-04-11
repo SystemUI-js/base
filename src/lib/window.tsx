@@ -4,9 +4,6 @@ import {
   CWindowBody,
   CWindowTitle,
   Theme,
-  defaultThemeDefinition,
-  win98ThemeDefinition,
-  winXpThemeDefinition,
   type CButtonProps,
   type CWindowBodyProps,
   type CWindowProps,
@@ -15,23 +12,18 @@ import {
   type WindowTitleActionButtonPosition,
 } from '@system-ui-js/chameleon';
 import type { ReactNode } from 'react';
+import {
+  DEFAULT_WINDOW_THEME_CLASS_NAME,
+  WINDOW_THEME_CLASS_NAMES,
+  type BaseThemeName,
+  type BaseThemeToken,
+} from './window-theme';
 
 const WINDOW_RESIZE_OPTIONS: Readonly<CWindowResizeOptions> = {
   edgeWidth: 6,
   minContentWidth: 240,
   minContentHeight: 180,
 };
-
-export const WINDOW_THEME_CLASS_NAMES = {
-  default: defaultThemeDefinition.className,
-  win98: win98ThemeDefinition.className,
-  winxp: winXpThemeDefinition.className,
-} as const;
-
-export type BaseThemeName = keyof typeof WINDOW_THEME_CLASS_NAMES;
-export type BaseThemeToken = BaseThemeName | string;
-
-export const DEFAULT_WINDOW_THEME_CLASS_NAME = WINDOW_THEME_CLASS_NAMES.win98;
 
 function isBaseThemeName(value: string): value is BaseThemeName {
   return value in WINDOW_THEME_CLASS_NAMES;
