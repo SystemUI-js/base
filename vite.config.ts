@@ -1,15 +1,18 @@
+import { fileURLToPath, URL } from 'node:url';
+
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  server: {
-    port: 9999,
-    host: true,
-    hmr: {
-      port: 9999
-    }
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@system-ui-js/base': fileURLToPath(
+        new URL('./src/lib/index.ts', import.meta.url),
+      ),
+    },
   },
   build: {
-    outDir: 'dist',
-    sourcemap: true
-  }
+    outDir: 'dist-demo',
+  },
 });
