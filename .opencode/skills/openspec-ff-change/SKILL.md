@@ -45,7 +45,12 @@ Fast-forward through artifact creation - generate everything needed to start imp
 
 4. **Create artifacts in sequence until apply-ready**
 
-   Use the **todowrite tool** to track progress through the artifacts.
+   Use the session's available progress-tracking mechanism to track artifact work.
+
+   Preferred order:
+   - `update_plan`, when exposed by the runtime
+   - `todowrite`, when exposed by the runtime
+   - brief in-chat progress updates when neither tool is available
 
    Loop through artifacts in dependency order (artifacts with no pending dependencies first):
 

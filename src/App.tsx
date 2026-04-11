@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import {
   BaseThemeProvider,
@@ -18,6 +18,11 @@ type FocusTask = {
   readonly id: string;
   readonly label: string;
   readonly detail: string;
+};
+
+type LogEntry = {
+  readonly id: number;
+  readonly message: string;
 };
 
 const focusTasks = [
@@ -59,9 +64,10 @@ function App() {
     focusTasks[0].id,
   );
   const [refreshCount, setRefreshCount] = useState(1);
-  const [logEntries, setLogEntries] = useState<string[]>([
-    ...initialLogEntries,
-  ]);
+  const nextLogEntryIdRef = useRef(initialLogEntries.length);
+  const [logEntries, setLogEntries] = useState<LogEntry[]>(() =>
+    initialLogEntries.map((message, index) => ({ id: index, message })),
+  );
   const [inspectorVisible, setInspectorVisible] = useState(true);
 
   const selectedTask = useMemo(
@@ -89,8 +95,16 @@ function App() {
     { label: '刷新次数', value: `${refreshCount} 次` },
   ] as const;
 
-  function prependLogEntry(entry: string) {
-    setLogEntries((currentEntries) => [entry, ...currentEntries].slice(0, 4));
+  function prependLogEntry(message: string) {
+    const logEntry: LogEntry = {
+      id: nextLogEntryIdRef.current,
+      message,
+    };
+
+    nextLogEntryIdRef.current += 1;
+    setLogEntries((currentEntries) =>
+      [logEntry, ...currentEntries].slice(0, 4),
+    );
   }
 
   function handleRefreshSummary() {
@@ -228,8 +242,11 @@ function App() {
                     </p>
                     <div className="sb-base-window-log">
                       {logEntries.map((entry) => (
-                        <div className="sb-base-window-log-entry" key={entry}>
-                          {entry}
+                        <div
+                          className="sb-base-window-log-entry"
+                          key={entry.id}
+                        >
+                          {entry.message}
                         </div>
                       ))}
                     </div>
