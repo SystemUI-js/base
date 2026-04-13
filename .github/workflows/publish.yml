@@ -5,6 +5,10 @@ on:
     branches:
       - 'version/*'
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
@@ -70,12 +74,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --tag "${{ steps.metadata.outputs.publish_tag }}" --access public
-
-      - name: Ensure pre-release dist-tag
-        if: steps.metadata.outputs.should_publish == 'true' && (steps.metadata.outputs.publish_tag == 'beta' || steps.metadata.outputs.publish_tag == 'dev')
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm dist-tag add "${{ steps.metadata.outputs.package_name }}@${{ steps.metadata.outputs.package_version }}" "${{ steps.metadata.outputs.publish_tag }}"
 
       - name: Skip duplicate publish
         if: steps.metadata.outputs.should_publish != 'true'
