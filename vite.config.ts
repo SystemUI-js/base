@@ -12,6 +12,10 @@ export default defineConfig({
       ),
     },
   },
+  server: {
+    port: 9073,
+    host: '0.0.0.0',
+  },
   build: {
     outDir: 'dist-demo',
   },

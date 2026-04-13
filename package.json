@@ -2,6 +2,7 @@
   "name": "@system-ui-js/base",
   "version": "0.1.0",
   "description": "System UI 基础包与 Window Demo 展示站",
+  "packageManager": "yarn@1.22.22",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -22,7 +23,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts",
     "dev:demo": "vite --config vite.config.ts",
-    "build": "npm run build:lib && npm run build:demo",
+    "build": "yarn build:lib && yarn build:demo",
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
     "build:demo": "tsc -p tsconfig.app.json && vite build --config vite.config.ts",
     "preview:demo": "vite preview --config vite.config.ts",

@@ -1,0 +1,82 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - 'version/*'
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Read package metadata and publish plan
+        id: metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PUBLISH_TAG="latest"
+
+          if [[ "$PACKAGE_VERSION" == *-dev* ]]; then
+            PUBLISH_TAG="dev"
+          elif [[ "$PACKAGE_VERSION" == *-beta* ]]; then
+            PUBLISH_TAG="beta"
+          fi
+
+          SHOULD_PUBLISH="true"
+          if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version > /dev/null 2>&1; then
+            SHOULD_PUBLISH="false"
+          fi
+
+          echo "Detected branch: $BRANCH"
+          echo "Package: $PACKAGE_NAME"
+          echo "Version: $PACKAGE_VERSION"
+          echo "Publish tag: $PUBLISH_TAG"
+          echo "Should publish: $SHOULD_PUBLISH"
+
+          echo "package_name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "package_version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "publish_tag=$PUBLISH_TAG" >> "$GITHUB_OUTPUT"
+          echo "should_publish=$SHOULD_PUBLISH" >> "$GITHUB_OUTPUT"
+
+      - name: Run build
+        if: steps.metadata.outputs.should_publish == 'true'
+        run: yarn build
+
+      - name: Publish package
+        if: steps.metadata.outputs.should_publish == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --tag "${{ steps.metadata.outputs.publish_tag }}" --access public
+
+      - name: Skip duplicate publish
+        if: steps.metadata.outputs.should_publish != 'true'
+        run: |
+          echo "Version ${{ steps.metadata.outputs.package_version }} already exists on npm."
+          echo "Skipping publish for ${{ steps.metadata.outputs.package_name }}."
