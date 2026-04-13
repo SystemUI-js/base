@@ -6,12 +6,12 @@
 
 ### Requirement: Pull request validation workflow
 
-仓库 SHALL 在面向 `main` 或 `dev` 的 Pull Request 场景下提供统一的 GitHub Actions 校验流程，并使用当前仓库已稳定存在的 npm 脚本完成依赖安装、静态检查、构建与发布前打包校验。
+仓库 SHALL 在面向 `main` 或 `dev` 的 Pull Request 场景下提供统一的 GitHub Actions 校验流程，并使用当前仓库已稳定存在的 yarn 脚本完成依赖安装、静态检查、构建与发布前打包校验。
 
 #### Scenario: Validate a pull request with repository checks
 
 - **WHEN** 维护者创建或更新目标分支为 `main` 或 `dev` 的 Pull Request
-- **THEN** 系统 MUST 通过 GitHub Actions 执行代码拉取、Node 20 环境准备、`npm ci`、`npm run lint`、`npm run build` 与 `npm pack --dry-run`
+- **THEN** 系统 MUST 通过 GitHub Actions 执行代码拉取、Node 20 环境准备、`yarn install --frozen-lockfile`、`yarn lint`、`yarn build` 与 `yarn pack`
 
 ### Requirement: Pull request validation keeps only the latest run
 

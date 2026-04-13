@@ -3,3 +3,4 @@ dist/
 dist-demo/
 .history/
 *.tsbuildinfo
+package-lock.json
