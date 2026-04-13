@@ -12,7 +12,7 @@ const configDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'node_modules', '.history'],
   },
   {
     files: ['**/*.{ts,tsx}'],
