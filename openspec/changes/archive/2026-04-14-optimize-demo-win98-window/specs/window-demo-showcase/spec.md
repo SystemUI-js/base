@@ -1,8 +1,4 @@
-## Purpose
-
-定义 Window Demo 展示能力，确保展示站能够基于 `@system-ui-js/chameleon` 呈现首个 Window 场景，并支持独立构建与交付。
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Demo site integrates chameleon components
 
@@ -26,12 +22,3 @@ Demo 展示站的默认首屏 SHALL 聚焦展示一个 Win98 主题窗口，使�
 
 - **WHEN** 用户查看默认首屏窗口内容区
 - **THEN** 系统 MUST 展示少量静态说明文本或列表，以验证窗口内容承载与基础排版可读性，而不是提供工作台式交互反馈
-
-### Requirement: Demo delivery is independently buildable
-
-Demo 展示站 SHALL 具备独立构建能力，使展示产物能够在不发布基础包的情况下单独生成和部署。
-
-#### Scenario: Build the demo site only
-
-- **WHEN** 维护者执行 Demo 展示站构建流程
-- **THEN** 系统 MUST 单独生成可部署的展示站产物，且不要求同步执行基础包发布流程

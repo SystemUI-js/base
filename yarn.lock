@@ -394,10 +394,10 @@
   resolved "https://registry.npmmirror.com/@rolldown/pluginutils/-/pluginutils-1.0.0-rc.7.tgz#0414869467f0e471a6515d4f506c85fde867e022"
   integrity sha512-qujRfC8sFVInYSPPMLQByRh7zhwkGFS4+tyMQ83srV1qrxL4g8E2tyxVVyxd0+8QeBM1mIk9KbWxkegRr76XzA==
 
-"@system-ui-js/chameleon@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/@system-ui-js/chameleon/-/chameleon-0.2.0.tgz#48de30857c541e5f5de50d119796cb61f4465c92"
-  integrity sha512-iKm480vkSvJqhhsnG5xxoBUp/Rf25X76Rmyi/C2LALiweD4IhSTsoSUang40CR7HieT2GucuJU/DrY+L9Thihg==
+"@system-ui-js/chameleon@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.npmmirror.com/@system-ui-js/chameleon/-/chameleon-0.2.2.tgz#ba1ce88af733b07bae3dcff1ad067df7fb8bd0c3"
+  integrity sha512-af7t57hVXPhKfwnTm6fo5eqiXJg16JqHLg+GfxDIONyUcFK2JHyrLfk+hYhat07C5sy5c79Boph1sERT4ARktQ==
   dependencies:
     "@system-ui-js/multi-drag" "^0.2.7"
 
