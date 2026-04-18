@@ -1,0 +1,202 @@
+.sb-base-system {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
+.sb-base-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.sb-base-screen__surface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.cm-window-frame,
+.cm-window-preview-frame {
+  box-sizing: border-box;
+}
+
+.cm-window__inner,
+.cm-window {
+  height: 100%;
+}
+
+.cm-window {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  color: #1f1f1f;
+}
+
+.cm-window__title-bar {
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.cm-window__title-bar--with-controls {
+  display: flex;
+  align-items: center;
+}
+
+.cm-window__title-bar__text {
+  flex-shrink: 0;
+}
+
+.cm-window__title-bar--with-controls .cm-window__title-bar__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cm-window__title-bar__controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.cm-window__title-bar__controls--right {
+  margin-left: auto;
+}
+
+.cm-window__title-bar__controls--left {
+  margin-right: 4px;
+}
+
+.cm-window__body {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.cm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cm-theme--default .cm-window-frame,
+.cm-theme--default.cm-window-frame {
+  padding: 2px;
+  border: 1px solid #7d7d7d;
+  background: linear-gradient(180deg, #fefefe, #d9d9d9);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    inset 1px 1px rgba(255, 255, 255, 0.85),
+    inset -1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.cm-theme--default .cm-window,
+.cm-theme--default.cm-window {
+  border: 1px solid #b8b8b8;
+  background: linear-gradient(180deg, #fbfbfb, #ececec);
+}
+
+.cm-theme--default .cm-window__title-bar,
+.cm-theme--default.cm-window__title-bar {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(16, 24, 40, 0.22);
+  background: linear-gradient(180deg, #6f97ce, #5478a8);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cm-theme--default .cm-window__body,
+.cm-theme--default.cm-window__body {
+  padding: 12px;
+  background: linear-gradient(180deg, #fff, #f3f3f3);
+}
+
+.cm-theme--win98 .cm-window-frame,
+.cm-theme--win98.cm-window-frame {
+  padding: 3px;
+  background: silver;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #dfdfdf,
+    inset -2px -2px gray,
+    inset 2px 2px #fff;
+}
+
+.cm-theme--win98 .cm-window,
+.cm-theme--win98.cm-window {
+  background: silver;
+}
+
+.cm-theme--win98 .cm-window__title-bar,
+.cm-theme--win98.cm-window__title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 2px 3px 3px;
+  background: linear-gradient(90deg, navy, #1084d0);
+  color: #fff;
+}
+
+.cm-theme--win98 .cm-window__title-bar .cm-window__title-bar__text,
+.cm-theme--win98.cm-window__title-bar .cm-window__title-bar__text {
+  margin-right: 24px;
+}
+
+.cm-theme--win98 .cm-window__body,
+.cm-theme--win98.cm-window__body {
+  margin: 8px;
+}
+
+.cm-theme--win98.cm-button {
+  min-width: 75px;
+  min-height: 23px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  background: silver;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #fff,
+    inset -2px -2px gray,
+    inset 2px 2px #dfdfdf;
+  color: transparent;
+  text-shadow: 0 0 #222;
+}
+
+.cm-theme--winxp .cm-window-frame,
+.cm-theme--winxp.cm-window-frame {
+  padding: 3px;
+  border: 1px solid #245dbe;
+  border-radius: 8px 8px 6px 6px;
+  background: linear-gradient(180deg, #5fa3ff, #2d65bd);
+  box-shadow: 0 10px 24px rgba(36, 93, 190, 0.24);
+}
+
+.cm-theme--winxp .cm-window,
+.cm-theme--winxp.cm-window {
+  border-radius: 6px;
+  background: linear-gradient(180deg, #f8fbff, #e7eefb);
+}
+
+.cm-theme--winxp .cm-window__title-bar,
+.cm-theme--winxp.cm-window__title-bar {
+  padding: 7px 10px;
+  background: #316ac5;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cm-theme--winxp .cm-window__body,
+.cm-theme--winxp.cm-window__body {
+  padding: 12px;
+  background: linear-gradient(180deg, #f8fbff, #e7eefb);
+}
+
+.sb-base-window-action {
+  min-width: 7rem;
+}

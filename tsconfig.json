@@ -2,13 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./packages/base"
     },
     {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
+      "path": "./apps/expo-demo"
     }
   ]
 }

@@ -1,58 +1,44 @@
 {
-  "name": "@system-ui-js/base",
+  "name": "sysui-workspace",
+  "private": true,
   "version": "0.1.0",
-  "description": "System UI 基础包与 Window Demo 展示站",
+  "description": "System UI 基础包与 Expo 示例应用工作区",
   "packageManager": "yarn@1.22.22",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./styles.css": "./dist/styles.css"
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20.19.4"
   },
-  "files": [
-    "dist"
-  ],
-  "sideEffects": [
-    "**/*.css"
-  ],
   "scripts": {
-    "dev": "vite --config vite.config.ts",
-    "dev:demo": "vite --config vite.config.ts",
-    "build": "yarn build:lib && yarn build:demo",
-    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
-    "build:demo": "tsc -p tsconfig.app.json && vite build --config vite.config.ts",
-    "preview:demo": "vite preview --config vite.config.ts",
+    "dev": "yarn workspace @system-ui-js/expo-demo dev",
+    "dev:demo": "yarn dev",
+    "build": "yarn build:base",
+    "build:base": "yarn workspace @system-ui-js/base build",
+    "check:expo": "yarn workspace @system-ui-js/expo-demo validate",
+    "pack:base": "yarn workspace @system-ui-js/base pack:check",
+    "validate": "yarn lint && yarn typecheck && yarn build:base && yarn pack:base && yarn check:expo",
+    "typecheck": "yarn build:base && tsc -b",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
-  "dependencies": {
-    "@system-ui-js/chameleon": "0.2.2"
-  },
-  "peerDependencies": {
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
-  },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
     "@eslint/js": "^9.39.4",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "prettier": "^3.8.2",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "tsup": "^8.5.0",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1",
-    "vite": "^8.0.8"
+    "typescript-eslint": "^8.58.1"
   }
 }

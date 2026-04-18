@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   pr-checks:
-    name: Lint, Build and Pack
+    name: Lint, Typecheck, Pack and Expo Validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,8 +33,14 @@ jobs:
       - name: Run lint
         run: yarn lint
 
-      - name: Run build
-        run: yarn build
+      - name: Run typecheck
+        run: yarn typecheck
 
-      - name: Verify yarn pack
-        run: yarn pack --filename package.tgz && rm -f package.tgz
+      - name: Build base package
+        run: yarn build:base
+
+      - name: Verify base package pack
+        run: yarn pack:base
+
+      - name: Validate Expo demo
+        run: yarn check:expo

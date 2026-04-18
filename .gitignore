@@ -4,3 +4,6 @@ dist-demo/
 .history/
 *.tsbuildinfo
 package-lock.json
+.expo/
+package.tgz
+apps/expo-demo/dist-export/
