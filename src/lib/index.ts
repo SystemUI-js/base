@@ -1,5 +1,3 @@
-import './styles/base.css';
-
 export {
   BaseThemeProvider,
   BaseWindow,

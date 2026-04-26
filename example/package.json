@@ -1,0 +1,25 @@
+{
+  "name": "@system-ui-js/base-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private Expo managed example for native validation. `react-dom` remains only to satisfy the current @system-ui-js/base peer contract and does not restore web support.",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "prestart": "yarn --cwd .. build:lib && yarn install --frozen-lockfile",
+    "start": "expo start",
+    "prebuild": "yarn --cwd .. build:lib && yarn install --frozen-lockfile",
+    "build": "expo export --platform ios --output-dir dist-example-ios && expo export --platform android --output-dir dist-example-android"
+  },
+  "dependencies": {
+    "@system-ui-js/base": "file:..",
+    "expo": "^54.0.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "react-native": "0.81.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "babel-preset-expo": "^54.0.0",
+    "typescript": "^6.0.2"
+  }
+}

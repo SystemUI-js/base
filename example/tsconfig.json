@@ -1,0 +1,14 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@system-ui-js/base": ["../dist/index.d.ts"]
+    }
+  },
+  "include": [
+    "App.tsx"
+  ]
+}

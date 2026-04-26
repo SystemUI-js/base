@@ -1,0 +1,49 @@
+yarn run v1.22.22
+$ yarn build:lib && yarn build:example
+$ vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json
+[36mvite v8.0.8 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.js  9.47 kB │ gzip: 3.44 kB │ map: 25.81 kB
+
+[32m✓ built in 32ms[39m
+$ yarn --cwd example build
+$ yarn --cwd .. build:lib && yarn install --force --frozen-lockfile
+$ vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json
+[36mvite v8.0.8 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.js  9.47 kB │ gzip: 3.44 kB │ map: 25.81 kB
+
+[32m✓ built in 42ms[39m
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Rebuilding all packages...
+$ expo export --platform ios --output-dir dist-example-ios && expo export --platform android --output-dir dist-example-android
+Starting Metro Bundler
+iOS node_modules/expo/AppEntry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+iOS Bundled 3366ms node_modules/expo/AppEntry.js (1055 modules)
+
+› ios bundles (1):
+_expo/static/js/ios/AppEntry-0814e87d61d29321c485facb2487f161.hbc (2.7 MB)
+
+› Files (1):
+metadata.json (145 B)
+
+Exported: dist-example-ios
+Starting Metro Bundler
+Android node_modules/expo/AppEntry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Android node_modules/expo/AppEntry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.9% (1051/1051)
+Android Bundled 3631ms node_modules/expo/AppEntry.js (1051 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-47a8fe94c86d11acca0ba7eb49fabb08.hbc (2.71 MB)
+
+› Files (1):
+metadata.json (153 B)
+
+Exported: dist-example-android
+Done in 278.33s.

@@ -1,0 +1,3 @@
+yarn pack v1.22.22
+success Wrote tarball to "package.tgz".
+Done in 0.11s.
