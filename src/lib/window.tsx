@@ -151,7 +151,7 @@ export function BaseWindowActionButton({
   return (
     <CButton
       {...buttonProps}
-      style={mergedStyle as ChameleonButtonProps['style']}
+      style={mergedStyle}
       theme={theme ? resolveThemeClassName(theme) : undefined}
       variant={variant}
     >

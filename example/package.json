@@ -5,9 +5,9 @@
   "description": "Private Expo managed example for native validation. `react-dom` remains only to satisfy the current @system-ui-js/base peer contract and does not restore web support.",
   "main": "expo/AppEntry.js",
   "scripts": {
-    "prestart": "yarn --cwd .. build:lib && yarn install --frozen-lockfile",
+    "prestart": "yarn --cwd .. build:lib && yarn install --force --frozen-lockfile",
     "start": "expo start",
-    "prebuild": "yarn --cwd .. build:lib && yarn install --frozen-lockfile",
+    "prebuild": "yarn --cwd .. build:lib && yarn install --force --frozen-lockfile",
     "build": "expo export --platform ios --output-dir dist-example-ios && expo export --platform android --output-dir dist-example-android"
   },
   "dependencies": {
