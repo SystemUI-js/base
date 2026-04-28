@@ -5,7 +5,7 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@system-ui-js/base": ["../dist/index.d.ts"]
+      "@system-ui-js/base": ["../src/lib/index.ts"]
     }
   },
   "include": [
