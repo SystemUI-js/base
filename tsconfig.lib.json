@@ -8,7 +8,7 @@
     "emitDeclarationOnly": true,
     "rootDir": "./src/lib",
     "outDir": "./dist",
-    "tsBuildInfoFile": "./dist/tsconfig.lib.tsbuildinfo"
+    "tsBuildInfoFile": "./tsconfig.lib.tsbuildinfo"
   },
   "include": ["src/lib/**/*"],
   "exclude": ["src/lib/**/*.test.ts", "src/lib/**/*.test.tsx"]

@@ -18,8 +18,8 @@ export default function App() {
         <View style={styles.stage}>
           <BaseWindow
             resizeOptions={undefined}
-            style={styles.window}
             theme={DEFAULT_WINDOW_THEME_CLASS_NAME}
+            width={420}
           >
             <BaseWindowTitle
               action={undefined}
@@ -36,7 +36,7 @@ export default function App() {
                 </Text>
                 <Text style={styles.copy}>Action count: {launchCount}</Text>
                 <BaseWindowActionButton
-                  onPress={() => setLaunchCount((count) => count + 1)}
+                  onClick={() => setLaunchCount((count) => count + 1)}
                   style={undefined}
                   theme={DEFAULT_WINDOW_THEME_CLASS_NAME}
                 >
@@ -61,10 +61,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
-  },
-  window: {
-    width: '100%',
-    maxWidth: 420,
   },
   body: {
     gap: 16,
