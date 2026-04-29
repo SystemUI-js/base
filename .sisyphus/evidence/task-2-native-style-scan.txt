@@ -1,0 +1,46 @@
+# Task 2: Native Style Verification Evidence
+# Date: 2026-04-26
+
+=== Verification Results ===
+
+1. CSS import check (src/lib/index.ts):
+   Command: grep -q "styles/base.css" src/lib/index.ts
+   Result: PASS - no base.css import found
+
+2. sb-base-window-action class check (src/lib/window.tsx):
+   Command: grep -q "sb-base-window-action" src/lib/window.tsx
+   Result: PASS - no sb-base-window-action found
+
+3. File deletion check:
+   Command: test ! -f src/lib/styles/base.css
+   Result: PASS - base.css deleted
+
+=== Final State of Modified Files ===
+
+src/lib/index.ts (22 lines):
+- Removed: import './styles/base.css';
+- Only exports remain
+
+src/lib/window.tsx (166 lines):
+- Added: import { StyleProp, ViewStyle } from 'react-native';
+- Added: style parameter to BaseWindowActionButton
+- Changed: className pass-through (no longer merged with sb-base-window-action)
+- Added: defaultStyle with minWidth: 112
+- Added: mergedStyle combining defaultStyle and caller-provided style
+- Replaced: mergeClassNames('sb-base-window-action', className) with just className
+- Added: style={mergedStyle} prop to CButton
+
+=== Contract Preservation ===
+
+BaseWindowActionButtonProps interface unchanged:
+- Extends Omit<CButtonProps, 'theme'>
+- Adds optional theme prop
+- Caller can still pass className and style (both passthrough to CButton)
+- CButton's style prop (StyleProp<ViewStyle>) handles native-safe styling
+
+=== Type Compatibility ===
+
+CButtonProps from Chameleon 0.3.0:
+- Has style?: StyleProp<ViewStyle>
+- Has className?: string
+- Both preserved in passthrough

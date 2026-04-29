@@ -1,0 +1,58 @@
+{
+  "active_plan": "/home/zhangxiao/frontend/worktrees/base/feature-turn-to-expo/.sisyphus/plans/chameleon-expo-migration.md",
+  "started_at": "2026-04-26T04:45:03.191Z",
+  "session_ids": [
+    "ses_237e50ad5ffe7yvSTkFndIW6dM"
+  ],
+  "session_origins": {
+    "ses_237e50ad5ffe7yvSTkFndIW6dM": "direct"
+  },
+  "plan_name": "chameleon-expo-migration",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "Rebuild the root package contract around Chameleon `0.3.0`",
+      "session_id": "ses_237e40011ffeH3BUqHB3MNN3ue",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-04-26T04:53:40.586Z"
+    },
+    "todo:3": {
+      "task_key": "todo:3",
+      "task_label": "3",
+      "task_title": "Refactor wrapper components to the Chameleon `0.3.0` runtime contract",
+      "session_id": "ses_237dbcb86ffedBm7SumRp16jVI",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-04-26T05:01:24.987Z"
+    },
+    "todo:5": {
+      "task_key": "todo:5",
+      "task_label": "5",
+      "task_title": "Add a private native Expo example app under `example/`",
+      "session_id": "ses_237d4acc3ffeUs3AK3Ze1u83EW",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-04-26T05:15:14.855Z"
+    },
+    "todo:6": {
+      "task_key": "todo:6",
+      "task_label": "6",
+      "task_title": "Rework build, lint, and CI around the library + native example split",
+      "session_id": "ses_237c83575ffe0y506rM4O7igw0",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-04-26T05:23:31.775Z"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "Plan Compliance Audit — oracle",
+      "session_id": "ses_237a35637ffeae3WSbUPzD5lUV",
+      "agent": "explore",
+      "updated_at": "2026-04-26T05:57:19.709Z"
+    }
+  }
+}

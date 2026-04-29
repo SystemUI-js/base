@@ -1,0 +1,21 @@
+yarn build:lib
+yarn run v1.22.22
+warning package.json: No license field
+$ vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json
+vite v8.0.8 building client environment for production...
+transforming...✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.js  9.44 kB │ gzip: 3.43 kB │ map: 25.72 kB
+
+✓ built in 33ms
+Done in 1.37s.
+
+node export verification
+exports-ok
+
+node theme-definition verification
+themes-ok
+
+node native-safe wrapper verification
+native-safe-wrapper

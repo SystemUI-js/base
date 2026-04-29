@@ -1,0 +1,16 @@
+Task 7 Jest Suite Evidence
+
+- Verified config exists: `test -f jest.config.cjs`
+- Test runtime: `PATH=/home/zhangxiao/.nvm/versions/node/v24.15.0/bin:$PATH`
+- Command: `yarn test --runInBand`
+
+PASS src/lib/window.test.tsx
+PASS src/lib/window-theme.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+
+- Mock verification command: `grep -R "jest.mock('@system-ui-js/chameleon'" src --line-number`
+src/lib/window-theme.test.ts:3:jest.mock('@system-ui-js/chameleon', () => ({
+src/lib/window.test.tsx:4:jest.mock('@system-ui-js/chameleon', () => {
