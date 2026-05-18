@@ -91,6 +91,8 @@ export interface BaseWindowTitleProps extends Omit<
   readonly action?: ReactNode;
   readonly actionPosition?: WindowTitleActionButtonPosition;
   readonly theme?: BaseThemeToken;
+  readonly closable?: boolean;
+  readonly onClose?: () => void;
 }
 
 export function BaseWindowTitle({
@@ -98,12 +100,27 @@ export function BaseWindowTitle({
   actionPosition = 'right',
   children,
   theme,
+  closable,
+  onClose,
   ...titleProps
 }: BaseWindowTitleProps) {
+  const closeButton = closable ? (
+    <BaseWindowActionButton onClick={onClose} aria-label="Close">
+      ×
+    </BaseWindowActionButton>
+  ) : null;
+
+  const actionButton = action || closeButton ? (
+    <>
+      {action}
+      {closeButton}
+    </>
+  ) : undefined;
+
   return (
     <CWindowTitle
       {...titleProps}
-      actionButton={action}
+      actionButton={actionButton}
       actionButtonPosition={actionPosition}
       theme={theme ? resolveThemeClassName(theme) : undefined}
     >

@@ -1,5 +1,7 @@
 import './styles/base.css';
 
+import { WindowManager } from './window-manager';
+
 export {
   BaseThemeProvider,
   BaseWindow,
@@ -22,3 +24,15 @@ export type {
 } from './window';
 
 export type { BaseThemeName, BaseThemeToken } from './window-theme';
+
+export { WindowManager };
+
+export const windowManager = new WindowManager();
+
+export type {
+  WindowSlotContent,
+  WindowLifecycleStatus,
+  WindowCreateOptions,
+  WindowContent,
+  WindowInstance,
+} from './window-manager';

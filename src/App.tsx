@@ -6,6 +6,7 @@ import {
   BaseWindowActionButton,
   BaseWindowBody,
   BaseWindowTitle,
+  windowManager,
 } from '@system-ui-js/base';
 
 import './styles/app.css';
@@ -69,6 +70,7 @@ function App() {
     initialLogEntries.map((message, index) => ({ id: index, message })),
   );
   const [inspectorVisible, setInspectorVisible] = useState(true);
+  const [managedWindowCount, setManagedWindowCount] = useState(0);
 
   const selectedTask = useMemo(
     () =>
@@ -137,6 +139,38 @@ function App() {
     );
   }
 
+  function handleCreateManagedWindow() {
+    const nextCount = managedWindowCount + 1;
+
+    setManagedWindowCount(nextCount);
+
+    const title = (
+      <span>
+        🪟 动态窗口 #{nextCount}
+      </span>
+    );
+
+    const body = (
+      <div style={{ padding: '12px' }}>
+        <p style={{ margin: '0 0 8px' }}>
+          这是通过 <code>windowManager.createWindow</code> 创建的动态窗口。
+        </p>
+        <p style={{ margin: 0, color: '#666' }}>
+          序号：{nextCount}
+        </p>
+      </div>
+    );
+
+    const statusBar = (
+      <span style={{ fontSize: '12px', color: '#888' }}>
+        状态：已创建 · 由 WindowManager 托管
+      </span>
+    );
+
+    windowManager.createWindow(title, body, statusBar, {});
+    prependLogEntry(`已创建动态管理窗口 #${nextCount}。`);
+  }
+
   return (
     <BaseThemeProvider theme="win98">
       <main className="app-shell">
@@ -177,6 +211,12 @@ function App() {
                     </BaseWindowActionButton>
                     <BaseWindowActionButton onClick={handleToggleInspector}>
                       {inspectorVisible ? '隐藏辅助窗' : '显示辅助窗'}
+                    </BaseWindowActionButton>
+                    <BaseWindowActionButton
+                      onClick={handleCreateManagedWindow}
+                      variant="primary"
+                    >
+                      创建管理窗口
                     </BaseWindowActionButton>
                   </div>
                 </header>
