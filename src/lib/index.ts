@@ -36,3 +36,5 @@ export type {
   WindowContent,
   WindowInstance,
 } from './window-manager';
+
+export { WindowsDesktopDemo } from './windows-desktop-demo';
