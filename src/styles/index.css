@@ -1,3 +1,6 @@
+/* 导入 chameleon 组件库的主题样式（包含 .cm-theme--win98 等所有主题 CSS 规则） */
+@import '../../node_modules/@system-ui-js/chameleon/dist/style.css';
+
 :root {
   font-family:
     Inter,
