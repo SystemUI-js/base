@@ -1,12 +1,12 @@
-import { BaseThemeProvider, WindowsDesktopDemo } from '@system-ui-js/base';
-
+import { WindowsDesktopDemo } from './demo/windows-desktop-demo';
+import { Theme } from '@system-ui-js/chameleon';
 import './styles/app.css';
 
 function App() {
   return (
-    <BaseThemeProvider theme="win98">
+    <Theme name="win98">
       <WindowsDesktopDemo />
-    </BaseThemeProvider>
+    </Theme>
   );
 }
 

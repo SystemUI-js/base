@@ -13,6 +13,10 @@
   position: absolute;
 }
 
+.sb-window-manager-window[data-window-state="minimized"] {
+  display: none !important;
+}
+
 .sb-window-manager-status-bar {
   padding: 0.25rem 0.5rem;
   font-size: 0.85rem;
