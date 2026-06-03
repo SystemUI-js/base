@@ -34,10 +34,10 @@ export const DemoWindowContent = (props: DemoWindowContentProps) => {
       <CWindowTitle
         actionButton={
           <div>
-            <CButton compact showFocusEffect={false} onClick={createNewWindow}>
+            <CButton showFocusEffect={false} onClick={createNewWindow}>
               +
             </CButton>
-            <CButton compact showFocusEffect={false} onClick={closeWindow}>
+            <CButton showFocusEffect={false} onClick={closeWindow}>
               x
             </CButton>
           </div>

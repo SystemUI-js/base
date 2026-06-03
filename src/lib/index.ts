@@ -1,19 +1,35 @@
 import './styles/base.css';
 
+export { default as FileManager } from './fileManager';
+
 export {
-  windowContentRegistry,
-  barComponentRegistry,
-  getWindowManagerStore,
-  generateId,
+  clampToRoot,
+  getParentPath,
+  joinPath,
+  normalizePath,
+} from './fileManager/path';
+
+export type {
+  FileManagerDirent,
+  FileManagerInteractionMode,
+  FileManagerProps,
+  FileSystemLike,
+} from './fileManager/types';
+
+export { default as SystemComponent } from './system';
+
+export {
   BarPosition,
   WindowState,
+  barComponentRegistry,
+  generateId,
+  getWindowManagerStore,
+  windowContentRegistry,
 } from './windowManager';
 
 export type {
-  WindowManagerState,
-  WindowListItem,
-  ScreenListItem,
   BarListItem,
+  ScreenListItem,
+  WindowListItem,
+  WindowManagerState,
 } from './windowManager';
-
-export { default as SystemComponent } from './system';

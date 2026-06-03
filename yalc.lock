@@ -1,11 +1,6 @@
 {
   "version": "v1",
   "packages": {
-    "@system-ui-js/chameleon": {
-      "signature": "c9144c1366a30a1d78ad8634df190212",
-      "file": true,
-      "replaced": "0.4.1"
-    },
     "@system-ui-js/file-system-browser-workspace": {
       "signature": "fc9734cf469741342944b1a2f1e8e86e",
       "file": true
@@ -17,6 +12,11 @@
     "@system-ui-js/file-system-browser": {
       "signature": "6516e16de6cfcdc3d9d1e0df9da5ff7e",
       "file": true
+    },
+    "@system-ui-js/chameleon": {
+      "signature": "2ad36a412174527b42d8aa9584462f28",
+      "file": true,
+      "replaced": "0.4.1"
     }
   }
 }
