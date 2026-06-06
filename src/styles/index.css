@@ -1,3 +1,6 @@
+/* 导入 chameleon 组件库的主题样式（包含 .cm-theme--win98 等所有主题 CSS 规则） */
+@import '../../node_modules/@system-ui-js/chameleon/dist/style.css';
+
 :root {
   font-family:
     Inter,
@@ -5,10 +8,6 @@
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #0f172a;
-  background: linear-gradient(180deg, #cbd5f5 0%, #dbeafe 42%, #eff6ff 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +21,7 @@
 html,
 body,
 #root {
-  min-height: 100%;
+  height: 100%;
   margin: 0;
 }
 
