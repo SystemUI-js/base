@@ -8,7 +8,6 @@ const testEntries: FileManagerDirent[] = [
 ];
 
 vi.mock('@system-ui-js/file-system-browser', () => {
-  // vi.mock 工厂被提升到顶部，内部不能引用外部变量
   const readdir = vi.fn<(...args: any[]) => Promise<FileManagerDirent[]>>()
     .mockResolvedValue([
       { name: 'test.txt', isDirectory: () => false, isFile: () => true, isSymbolicLink: () => false },
@@ -16,17 +15,14 @@ vi.mock('@system-ui-js/file-system-browser', () => {
     ]);
   const rm = vi.fn().mockResolvedValue(undefined);
   const writeFile = vi.fn().mockResolvedValue(undefined);
+  const mkdir = vi.fn().mockResolvedValue(undefined);
 
   return {
-    default: { promises: { readdir, rm, writeFile } },
+    default: { promises: { readdir, rm, writeFile, mkdir } },
     registerPlugin: vi.fn(),
     usePlugin: vi.fn(),
   };
 });
-
-vi.mock('@system-ui-js/file-system-plugin-memory', () => ({
-  createMemoryStoragePlugin: {},
-}));
 
 import { FileBrowserWindow } from './file-browser-window';
 
@@ -37,6 +33,7 @@ const mockFs = fsBrowserModule.default as {
     readdir: ReturnType<typeof vi.fn>;
     rm: ReturnType<typeof vi.fn>;
     writeFile: ReturnType<typeof vi.fn>;
+    mkdir: ReturnType<typeof vi.fn>;
   };
 };
 
@@ -47,7 +44,7 @@ function getItemButtons(): HTMLElement[] {
 }
 
 function makeProps() {
-  const state = { windows: [], closeWindow: vi.fn() };
+  const state = { windows: [], closeWindow: vi.fn(), setWindowState: vi.fn() };
   const store = {
     getState: () => state,
     setState: () => {},
@@ -72,7 +69,7 @@ describe('FileBrowserWindow external controls', () => {
     mockFs.promises.writeFile.mockResolvedValue(undefined);
   });
 
-  it('renders Back/Forward/Delete/Upload controls outside the FileManager list', async () => {
+  it('renders Back/Forward/Delete/New Folder/Upload controls outside the FileManager list', async () => {
     render(<FileBrowserWindow {...makeProps()} />);
 
     await waitFor(() => {
@@ -82,15 +79,17 @@ describe('FileBrowserWindow external controls', () => {
     const backBtn = screen.getByText('← 返回');
     const forwardBtn = screen.getByText('前进 →');
     const deleteBtn = screen.getByText('删除');
+    const newFolderBtn = screen.getByText('新建文件夹');
     const uploadBtn = screen.getByText('上传');
 
     expect(backBtn).toBeInTheDocument();
     expect(forwardBtn).toBeInTheDocument();
     expect(deleteBtn).toBeInTheDocument();
+    expect(newFolderBtn).toBeInTheDocument();
     expect(uploadBtn).toBeInTheDocument();
 
     const listItems = getItemButtons();
-    for (const btn of [backBtn, forwardBtn, deleteBtn, uploadBtn]) {
+    for (const btn of [backBtn, forwardBtn, deleteBtn, newFolderBtn, uploadBtn]) {
       expect(listItems).not.toContain(btn);
     }
   });

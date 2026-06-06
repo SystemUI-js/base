@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { getWindowManagerStore, WindowListItem } from './index';
+import { getWindowManagerStore, WindowListItem, WindowState } from './index';
 
 describe('createWindow position staggering', () => {
   let store: ReturnType<typeof getWindowManagerStore>;
@@ -129,5 +129,183 @@ describe('createWindow position staggering', () => {
     expect(lastWindow).toBeDefined();
     expect(lastWindow?.x).toBeLessThanOrEqual(100);
     expect(lastWindow?.y).toBeLessThanOrEqual(100);
+  });
+});
+
+describe('createWindow dimensions', () => {
+  let store: ReturnType<typeof getWindowManagerStore>;
+
+  beforeEach(() => {
+    store = getWindowManagerStore();
+    store.setState({ screens: [] });
+  });
+
+  it('should assign default width/height when no dimensions provided', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const window = screen?.windows[0];
+
+    expect(window).toBeDefined();
+    expect(window?.width).toBe(400);
+    expect(window?.height).toBe(300);
+  });
+
+  it('should preserve explicit width/height when provided', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({
+      type: 'test-window',
+      width: 800,
+      height: 600
+    }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const window = screen?.windows[0];
+
+    expect(window).toBeDefined();
+    expect(window?.width).toBe(800);
+    expect(window?.height).toBe(600);
+  });
+});
+
+describe('setWindowState fullscreen transitions', () => {
+  let store: ReturnType<typeof getWindowManagerStore>;
+
+  beforeEach(() => {
+    store = getWindowManagerStore();
+    store.setState({ screens: [] });
+  });
+
+  it('should transition from Normal to Fullscreen', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const windowId = screen!.windows[0]!.id;
+
+    expect(screen!.windows[0]!.state).toBe(WindowState.Normal);
+
+    store.getState().setWindowState(windowId, WindowState.Fullscreen);
+
+    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
+    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Fullscreen);
+  });
+
+  it('should transition from Fullscreen back to Normal', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const windowId = screen!.windows[0]!.id;
+
+    store.getState().setWindowState(windowId, WindowState.Fullscreen);
+    store.getState().setWindowState(windowId, WindowState.Normal);
+
+    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
+    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Normal);
+  });
+
+  it('should save and restore geometry during fullscreen transitions', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({
+      type: 'test-window',
+      x: 100,
+      y: 200,
+      width: 640,
+      height: 480
+    }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const windowId = screen!.windows[0]!.id;
+
+    const originalX = screen!.windows[0]!.x;
+    const originalY = screen!.windows[0]!.y;
+    const originalWidth = screen!.windows[0]!.width;
+    const originalHeight = screen!.windows[0]!.height;
+
+    store.getState().setWindowState(windowId, WindowState.Fullscreen);
+
+    const fullscreenScreen = store.getState().screens.find(s => s.id === 'screen-1');
+    expect(fullscreenScreen!.windows[0]!.x).toBe(0);
+    expect(fullscreenScreen!.windows[0]!.y).toBe(0);
+    expect(fullscreenScreen!.windows[0]!.width).toBe(1920);
+    expect(fullscreenScreen!.windows[0]!.height).toBe(1080);
+
+    store.getState().setWindowState(windowId, WindowState.Normal);
+
+    const restoredScreen = store.getState().screens.find(s => s.id === 'screen-1');
+    expect(restoredScreen!.windows[0]!.x).toBe(originalX);
+    expect(restoredScreen!.windows[0]!.y).toBe(originalY);
+    expect(restoredScreen!.windows[0]!.width).toBe(originalWidth);
+    expect(restoredScreen!.windows[0]!.height).toBe(originalHeight);
+  });
+
+  it('should no-op when setting state on unknown window ID', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
+
+    const stateBefore = store.getState().screens;
+
+    store.getState().setWindowState('non-existent-window-id', WindowState.Fullscreen);
+
+    expect(store.getState().screens).toEqual(stateBefore);
+  });
+
+  it('should not affect other windows when changing one window state', () => {
+    store.getState().createScreen({
+      id: 'screen-1',
+      bars: [],
+      windows: [],
+      size: { width: 1920, height: 1080 }
+    });
+
+    store.getState().createWindow({ type: 'test-window-1' }, 'screen-1');
+    store.getState().createWindow({ type: 'test-window-2' }, 'screen-1');
+
+    const screen = store.getState().screens.find(s => s.id === 'screen-1');
+    const window1Id = screen!.windows[0]!.id;
+
+    store.getState().setWindowState(window1Id, WindowState.Fullscreen);
+
+    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
+    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Fullscreen);
+    expect(updatedScreen!.windows[1]!.state).toBe(WindowState.Normal);
   });
 });

@@ -39,6 +39,9 @@ export interface WindowListItem {
     active: boolean;
     x: number;
     y: number;
+    width: number;
+    height: number;
+    savedGeometry?: { x: number; y: number; width: number; height: number };
 }
 
 export interface WindowManagerState {
@@ -48,6 +51,7 @@ export interface WindowManagerState {
     closeWindow: (windowId: string) => void;
     focusWindow: (windowId: string) => void;
     createBar: (bar: BarListItem, screen: string) => void;
+    setWindowState: (windowId: string, state: WindowState) => void;
 }
 
 let idCounter = 0;
@@ -115,7 +119,9 @@ const windowManagerStore = create<WindowManagerState>()(((set, get) => ({
             props: window.props || {},
             type: window.type || '',
             x: finalX,
-            y: finalY
+            y: finalY,
+            width: window.width ?? DEFAULT_WIDTH,
+            height: window.height ?? DEFAULT_HEIGHT
         };
 
         console.log('Creating window:', newWindow, 'on screen:', screen);
@@ -160,6 +166,49 @@ const windowManagerStore = create<WindowManagerState>()(((set, get) => ({
         }));
         return {
             ...state,
+            screens: updatedScreens
+        };
+    }),
+    setWindowState: (windowId: string, state: WindowState) => set((prev) => {
+        const updatedScreens = prev.screens.map(screen => ({
+            ...screen,
+            windows: screen.windows.map(window => {
+                if (window.id !== windowId) return window;
+
+                if (state === WindowState.Fullscreen) {
+                    // 保存当前几何信息，然后切换到全屏（占满整个屏幕）
+                    return {
+                        ...window,
+                        state,
+                        x: 0,
+                        y: 0,
+                        width: screen.size.width,
+                        height: screen.size.height,
+                        savedGeometry: {
+                            x: window.x,
+                            y: window.y,
+                            width: window.width,
+                            height: window.height
+                        }
+                    };
+                } else if (state === WindowState.Normal && window.savedGeometry) {
+                    // 恢复之前保存的几何信息
+                    const { savedGeometry, ...rest } = window;
+                    return {
+                        ...rest,
+                        state,
+                        x: savedGeometry.x,
+                        y: savedGeometry.y,
+                        width: savedGeometry.width,
+                        height: savedGeometry.height
+                    };
+                }
+
+                return { ...window, state };
+            })
+        }));
+        return {
+            ...prev,
             screens: updatedScreens
         };
     }),

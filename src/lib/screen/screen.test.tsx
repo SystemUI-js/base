@@ -6,9 +6,16 @@ import { getWindowManagerStore, WindowState, windowContentRegistry } from '../wi
 import { CWindow, CWindowTitle } from '@system-ui-js/chameleon';
 
 const TestWindowContent = (props: any) => {
-  const { fullscreen: isFullscreen, ...rest } = props;
+  // Forward fullscreen + data-system-ui-fullscreen through to CWindow frame
+  const { fullscreen: isFullscreen, 'data-system-ui-fullscreen': dataFs, ...rest } = props;
   return (
-    <CWindow width={400} height={300} {...(isFullscreen ? { fullscreen: true } : {})} {...rest}>
+    <CWindow
+      width={400}
+      height={300}
+      {...(isFullscreen ? { fullscreen: true } : {})}
+      {...(dataFs ? { 'data-system-ui-fullscreen': dataFs } : {})}
+      {...rest}
+    >
       <CWindowTitle>Test Window</CWindowTitle>
       <div>Test Content</div>
     </CWindow>
@@ -26,6 +33,16 @@ beforeEach(() => {
     .system-ui-js__screen > .cm-window-frame.cm-window--fullscreen {
       position: absolute !important;
       inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .system-ui-js__screen > [data-system-ui-fullscreen="true"] {
+      position: absolute !important;
+      inset: 0 !important;
+      left: 0 !important;
+      top: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
       width: 100% !important;
       height: 100% !important;
     }
@@ -67,9 +84,11 @@ describe('ScreenComponent Fullscreen CSS', () => {
       store.getState().setWindowState('test-window-1', WindowState.Fullscreen);
     });
 
-    expect(windowFrame?.classList.contains('cm-window--fullscreen')).toBe(true);
+    const fullscreenFrame = document.querySelector('[data-system-ui-fullscreen="true"]');
+    expect(fullscreenFrame).toBeTruthy();
+    expect(fullscreenFrame?.getAttribute('data-system-ui-fullscreen')).toBe('true');
 
-    const computedStyle = window.getComputedStyle(windowFrame as Element);
+    const computedStyle = window.getComputedStyle(fullscreenFrame as Element);
     expect(computedStyle.position).toBe('absolute');
     expect(computedStyle.width).toBe('100%');
     expect(computedStyle.height).toBe('100%');
@@ -96,6 +115,7 @@ describe('ScreenComponent Fullscreen CSS', () => {
 
     const windowFrame = document.querySelector('.cm-window-frame');
     expect(windowFrame).toBeTruthy();
+    expect(windowFrame?.hasAttribute('data-system-ui-fullscreen')).toBe(false);
     expect(windowFrame?.classList.contains('cm-window--fullscreen')).toBe(false);
 
     const computedStyle = window.getComputedStyle(windowFrame as Element);

@@ -14,7 +14,7 @@
       "file": true
     },
     "@system-ui-js/chameleon": {
-      "signature": "2ad36a412174527b42d8aa9584462f28",
+      "signature": "221a7d059dc38e2267729792afc7497b",
       "file": true,
       "replaced": "0.4.1"
     }

@@ -1,34 +1,48 @@
 import type React from 'react';
 import { useState, useCallback, useRef } from 'react';
 import fs, { registerPlugin, usePlugin } from '@system-ui-js/file-system-browser';
-import { createMemoryStoragePlugin } from '@system-ui-js/file-system-plugin-memory';
+import type { FsPluginFactory } from '@system-ui-js/file-system-browser';
 import { CWindow, CWindowTitle, CButton } from '@system-ui-js/chameleon';
 import type { UseBoundStore, StoreApi } from 'zustand';
 import type { WindowManagerState } from '../lib/windowManager';
 import FileManager from '../lib/fileManager';
 import { joinPath } from '../lib/fileManager/path';
 
-let fsInitialized = false;
+const createIndexedDBPlugin: FsPluginFactory = (_options, ctx) => {
+  return {
+    match: /^/,
+    /* eslint-disable @typescript-eslint/unbound-method -- handler methods are passed as references for plugin registration */
+    handlers: {
+      readFile: ctx.baseFs.readFile,
+      writeFile: ctx.baseFs.writeFile,
+      appendFile: ctx.baseFs.appendFile,
+      rename: ctx.baseFs.rename,
+      copyFile: ctx.baseFs.copyFile,
+      mkdir: ctx.baseFs.mkdir,
+      readdir: ctx.baseFs.readdir,
+      rm: ctx.baseFs.rm,
+      unlink: ctx.baseFs.unlink,
+      rmdir: ctx.baseFs.rmdir,
+      stat: ctx.baseFs.stat,
+      lstat: ctx.baseFs.lstat,
+      readlink: ctx.baseFs.readlink,
+      symlink: ctx.baseFs.symlink,
+      link: ctx.baseFs.link,
+      exists: ctx.baseFs.exists,
+      access: ctx.baseFs.access,
+      nlink: ctx.baseFs.nlink,
+      open: ctx.baseFs.open,
+      read: ctx.baseFs.read,
+      write: ctx.baseFs.write,
+      close: ctx.baseFs.close,
+      requestPersistentStorage: ctx.baseFs.requestPersistentStorage,
+      diskUsage: ctx.baseFs.diskUsage,
+    },
+    /* eslint-enable @typescript-eslint/unbound-method */
+  };
+};
 
-function initFileSystem() {
-  if (fsInitialized) return;
-
-  try {
-    registerPlugin('memory', createMemoryStoragePlugin);
-  } catch {
-    // ignore duplicate registration
-  }
-
-  try {
-    // biome-ignore lint/correctness/useHookAtTopLevel: usePlugin is not a React hook
-    usePlugin('memory', { mountPath: '/memory' });
-    fsInitialized = true;
-  } catch (error) {
-    console.error('Failed to initialize file system:', error);
-  }
-}
-
-initFileSystem();
+registerPlugin('indexeddb', createIndexedDBPlugin);
 
 interface FileBrowserWindowProps {
   title: string;
@@ -36,11 +50,32 @@ interface FileBrowserWindowProps {
   store: UseBoundStore<StoreApi<WindowManagerState>>;
   screenId: string;
   windowProps: { title: string; id: string };
+  fullscreen?: boolean;
+  resizable?: boolean;
+  movable?: boolean;
+  active?: boolean;
+  style?: React.CSSProperties;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  onPointerDown?: () => void;
+  'data-system-ui-fullscreen'?: 'true';
 }
 
+// Bypasses Chameleon's isWindowTitleElement clone injection to prevent move callbacks in fullscreen.
+const StaticWindowTitle = (props: React.ComponentProps<typeof CWindowTitle>) => <CWindowTitle {...props} />;
+
 export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
-  const { screenId, windowProps, store, id, ...restProps } = props;
-  const [currentPath, setCurrentPath] = useState('/memory');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { windowProps, store, fullscreen: isFullscreen, resizable, movable, screenId: _screenId, ...windowRestProps } = props;
+  const effectiveResizable = isFullscreen ? false : resizable;
+  const effectiveMovable = isFullscreen ? false : movable !== false;
+  const TitleComponent = effectiveMovable ? CWindowTitle : StaticWindowTitle;
+  
+  usePlugin('indexeddb', { mountPath: '/' });
+  
+  const [currentPath, setCurrentPath] = useState('/');
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const [backStack, setBackStack] = useState<string[]>([]);
   const [forwardStack, setForwardStack] = useState<string[]>([]);
@@ -95,6 +130,20 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
     }
   }, [selectedPath]);
 
+  const handleNewFolder = useCallback(async () => {
+    const folderName = prompt('请输入新文件夹名称:');
+    if (!folderName) return;
+    try {
+      setError(null);
+      const newPath = joinPath(currentPath, folderName);
+      await fs.promises.mkdir(newPath, { recursive: true });
+      setRefreshKey((k) => k + 1);
+    } catch (err) {
+      console.error('Failed to create folder:', err);
+      setError(`创建文件夹失败: ${(err as Error).message}`);
+    }
+  }, [currentPath]);
+
   const handleUploadClick = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
@@ -123,16 +172,18 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
   );
 
   return (
-    <CWindow width={500} height={400} {...restProps}>
-      <CWindowTitle
+    <CWindow width={500} height={400} {...windowRestProps} resizable={effectiveResizable}>
+      <TitleComponent
         actionButton={
-          <CButton showFocusEffect={false} onClick={closeWindow}>
-            x
-          </CButton>
+          <>
+            <CButton showFocusEffect={false} onClick={closeWindow} aria-label="关闭">
+              x
+            </CButton>
+          </>
         }
       >
         {windowProps.title}
-      </CWindowTitle>
+      </TitleComponent>
       <div className="cm-window__body" style={{ padding: '8px', overflow: 'auto' }}>
         <div style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CButton onClick={goBack} disabled={backStack.length === 0}>
@@ -143,6 +194,9 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
           </CButton>
           <CButton onClick={() => { void handleDelete(); }} disabled={!selectedPath}>
             删除
+          </CButton>
+          <CButton onClick={() => { void handleNewFolder(); }}>
+            新建文件夹
           </CButton>
           <CButton onClick={handleUploadClick}>上传</CButton>
           <input
@@ -164,7 +218,7 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
 
         <FileManager
           fileSystem={fs}
-          root="/memory"
+          root="/"
           currentPath={currentPath}
           onPathChange={handlePathChange}
           selectedPath={selectedPath}

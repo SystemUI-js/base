@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import SystemComponent from '../lib/system';
 import type { WindowManagerState } from '../lib/windowManager';
-import { barComponentRegistry, BarPosition, generateId, getWindowManagerStore, windowContentRegistry } from '../lib/windowManager';
+import { barComponentRegistry, BarPosition, generateId, getWindowManagerStore, windowContentRegistry, WindowState } from '../lib/windowManager';
 import type { StoreApi, UseBoundStore } from 'zustand';
 import { CButton, CWindow, CWindowTitle, CStartBar } from '@system-ui-js/chameleon';
 import { FileBrowserWindow } from './file-browser-window';
@@ -14,10 +14,29 @@ interface DemoWindowContentProps {
   store: UseBoundStore<StoreApi<WindowManagerState>>;
   screenId: string;
   windowProps: { title: string; content: string; id: string };
+  fullscreen?: boolean;
+  resizable?: boolean;
+  movable?: boolean;
+  active?: boolean;
+  style?: React.CSSProperties;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  onPointerDown?: () => void;
+  'data-system-ui-fullscreen'?: 'true';
 }
 
+// Wrapper that renders CWindowTitle without being recognized by Chameleon's
+// isWindowTitleElement check (8529-8530), preventing onWindowMove callback injection.
+// Defined at module level so its type identity is stable across re-renders.
+const StaticWindowTitle = (props: React.ComponentProps<typeof CWindowTitle>) => <CWindowTitle {...props} />;
+
 export const DemoWindowContent = (props: DemoWindowContentProps) => {
-  const { screenId, windowProps, store, id, ...restProps } = props;
+  const { screenId, windowProps, store, fullscreen: isFullscreen, resizable, movable, ...windowRestProps } = props;
+  const effectiveResizable = isFullscreen ? false : resizable;
+  const effectiveMovable = isFullscreen ? false : movable !== false;
+  const TitleComponent = effectiveMovable ? CWindowTitle : StaticWindowTitle;
   const closeWindow = useCallback(() => {
     store.getState().closeWindow(props.id);
   }, [props.id, store]);
@@ -29,25 +48,37 @@ export const DemoWindowContent = (props: DemoWindowContentProps) => {
       props: { title: `New Window ${newWindowId}`, content: 'This is a new window.', id: newWindowId, screenId: props.screenId },
     }, screenId);
   }, [screenId, props.screenId, store]);
+  const toggleFullscreen = useCallback(() => {
+    if (isFullscreen) {
+      store.getState().setWindowState(props.id, WindowState.Normal);
+    } else {
+      store.getState().setWindowState(props.id, WindowState.Fullscreen);
+    }
+  }, [isFullscreen, props.id, store]);
   return (
-    <CWindow width={400} height={300} {...restProps}>
-      <CWindowTitle
+    <CWindow width={400} height={300} {...windowRestProps} resizable={effectiveResizable}>
+      <TitleComponent
         actionButton={
           <div>
             <CButton showFocusEffect={false} onClick={createNewWindow}>
               +
             </CButton>
-            <CButton showFocusEffect={false} onClick={closeWindow}>
+            <CButton showFocusEffect={false} onClick={closeWindow} aria-label="关闭">
               x
             </CButton>
           </div>
         }
       >
         {windowProps.title}
-      </CWindowTitle>
+      </TitleComponent>
       <div className="cm-window__body">
         <h3>{windowProps.title}</h3>
         <p>{windowProps.content}</p>
+        <div style={{ marginTop: '16px' }}>
+          <CButton onClick={toggleFullscreen} aria-label={isFullscreen ? '退出全屏' : '全屏'}>
+            {isFullscreen ? '退出全屏' : '全屏'}
+          </CButton>
+        </div>
       </div>
     </CWindow>
   );
@@ -128,7 +159,7 @@ export function WindowsDesktopDemo() {
   return (
     <>
       <SystemComponent windowManager={useWindowManagerStore} className="demo-system" />
-      <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 9999 }}>
+      <div style={{ position: 'fixed', top: '10px', left: '10px', zIndex: 9999 }}>
         <CButton onClick={createFileBrowserWindow}>
           打开文件浏览器
         </CButton>

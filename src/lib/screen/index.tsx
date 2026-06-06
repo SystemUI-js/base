@@ -3,6 +3,7 @@ import {
   barComponentRegistry,
   windowContentRegistry,
   WindowManagerState,
+  WindowState,
 } from '../windowManager';
 import { StoreApi, UseBoundStore } from "zustand";
 import "./index.css";
@@ -35,7 +36,9 @@ export default function ScreenComponent(props: Props) {
           );
         })}
         {windows.map((window) => {
-          console.log(window.zIndex);
+          const isFullscreen = window.state === WindowState.Fullscreen;
+          const rawResizable = typeof window.props.resizable === 'boolean' ? window.props.resizable : undefined;
+          const rawMovable = typeof window.props.movable === 'boolean' ? window.props.movable : undefined;
           const WindowComponent = windowContentRegistry.get(window.type) || null;
           return (
             WindowComponent && (
@@ -50,6 +53,12 @@ export default function ScreenComponent(props: Props) {
                 onPointerDown={() => props.windowManager.getState().focusWindow(window.id)}
                 x={window.x}
                 y={window.y}
+                width={window.width}
+                height={window.height}
+                fullscreen={isFullscreen}
+                data-system-ui-fullscreen={isFullscreen ? 'true' : undefined}
+                resizable={isFullscreen ? false : rawResizable}
+                movable={isFullscreen ? false : rawMovable}
               />
             )
           );
