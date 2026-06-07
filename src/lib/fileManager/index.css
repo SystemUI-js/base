@@ -78,3 +78,32 @@
 .system-ui-js__file-manager-status__empty {
     color: var(--cm-text-tertiary, #9ca3af);
 }
+
+/*
+ * 显示模式包装类（T3/T5）
+ * .system-ui-js__file-manager--list / --icon 仅作为钩子，
+ * 真正的网格/列表布局由 Chameleon CList 自身负责，
+ * 这里只追加最小的内边距，避免图标模式下贴边显示。
+ */
+.system-ui-js__file-manager--icon {
+    padding: 4px;
+}
+
+/*
+ * 拖拽态视觉反馈（T5）
+ * Chameleon CList 会在 item 上挂载 cm-list__item--draggable / --dragging / --drop-target，
+ * 这里只补充指针与轻量视觉提示，不与 Chameleon 自带样式冲突。
+ */
+.system-ui-js__file-manager .cm-list__item--draggable {
+    cursor: grab;
+}
+
+.system-ui-js__file-manager .cm-list__item--dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.system-ui-js__file-manager .cm-list__item--drop-target {
+    outline: 2px solid var(--cm-primary-bg, #e0e7ff);
+    outline-offset: -2px;
+}

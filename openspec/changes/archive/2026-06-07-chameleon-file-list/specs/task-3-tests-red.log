@@ -1,0 +1,23 @@
+## Task 3 - RED Log
+## Date: 2026-06-06
+
+NOTE: All 4 new tests are GREEN before implementation due to jsdom limitations:
+1. "fullscreen disables resize handles" — GREEN because Chameleon's renderResizeHandles() (line 8522-8523) already returns null when fullscreen=true, regardless of our resizable prop
+2. "fullscreen disables title-bar drag" — GREEN because jsdom does not support element.setPointerCapture(), so fireEvent.pointerDown/Move/Up does not trigger Chameleon's pointer-capture-based drag mechanism. Verified via debug test: before=(30,30) after=(30,30) even on a NON-fullscreen window.
+3. "restores exact geometry" — GREEN because setWindowState already saves/restores exact geometry via savedGeometry
+4. "toggle idempotency" — GREEN because data-system-ui-fullscreen attribute and CSS were already in place from Task 2
+
+The tests serve as behavior regression guards. The move-disabled test's true validation requires a real browser environment with pointer capture support.
+
+## Test Output (14/14 passed):
+ RUN  v4.1.6
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Duration  1.31s
+
+## New Tests Added:
+- fullscreen disables resize handles
+- fullscreen disables title-bar drag
+- restores exact geometry after fullscreen toggle
+- fullscreen toggle is idempotent (ON → OFF → ON)

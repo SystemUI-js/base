@@ -6,6 +6,7 @@ import { CWindow, CWindowTitle, CButton } from '@system-ui-js/chameleon';
 import type { UseBoundStore, StoreApi } from 'zustand';
 import type { WindowManagerState } from '../lib/windowManager';
 import FileManager from '../lib/fileManager';
+import type { FileManagerMoveError, FileManagerMoveContext } from '../lib/fileManager/types';
 import { joinPath } from '../lib/fileManager/path';
 
 const createIndexedDBPlugin: FsPluginFactory = (_options, ctx) => {
@@ -171,6 +172,21 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
     [currentPath]
   );
 
+  const handleMoveError = useCallback(
+    (error: FileManagerMoveError, _context: FileManagerMoveContext) => {
+      console.error('Failed to move:', error);
+      setError(`移动失败: ${error.message}`);
+    },
+    []
+  );
+
+  const handleMoveSuccess = useCallback(
+    (_context: FileManagerMoveContext) => {
+      setError(null);
+    },
+    []
+  );
+
   return (
     <CWindow width={500} height={400} {...windowRestProps} resizable={effectiveResizable}>
       <TitleComponent
@@ -225,6 +241,9 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
           onSelectionChange={setSelectedPath}
           interactionMode="auto"
           refreshKey={refreshKey}
+          draggable={true}
+          onMoveError={handleMoveError}
+          onMoveSuccess={handleMoveSuccess}
         />
       </div>
     </CWindow>

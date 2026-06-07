@@ -16,9 +16,11 @@ vi.mock('@system-ui-js/file-system-browser', () => {
   const rm = vi.fn().mockResolvedValue(undefined);
   const writeFile = vi.fn().mockResolvedValue(undefined);
   const mkdir = vi.fn().mockResolvedValue(undefined);
+  const rename = vi.fn().mockResolvedValue(undefined);
+  const exists = vi.fn().mockResolvedValue(false);
 
   return {
-    default: { promises: { readdir, rm, writeFile, mkdir } },
+    default: { promises: { readdir, rm, writeFile, mkdir, rename, exists } },
     registerPlugin: vi.fn(),
     usePlugin: vi.fn(),
   };
@@ -34,6 +36,8 @@ const mockFs = fsBrowserModule.default as {
     rm: ReturnType<typeof vi.fn>;
     writeFile: ReturnType<typeof vi.fn>;
     mkdir: ReturnType<typeof vi.fn>;
+    rename: ReturnType<typeof vi.fn>;
+    exists: ReturnType<typeof vi.fn>;
   };
 };
 
@@ -67,6 +71,8 @@ describe('FileBrowserWindow external controls', () => {
     mockFs.promises.readdir.mockResolvedValue(testEntries);
     mockFs.promises.rm.mockResolvedValue(undefined);
     mockFs.promises.writeFile.mockResolvedValue(undefined);
+    mockFs.promises.rename.mockResolvedValue(undefined);
+    mockFs.promises.exists.mockResolvedValue(false);
   });
 
   it('renders Back/Forward/Delete/New Folder/Upload controls outside the FileManager list', async () => {
@@ -222,5 +228,77 @@ describe('FileBrowserWindow external controls', () => {
       expect(items).toHaveLength(3);
       expect(items[2]).toHaveTextContent('photo.jpg');
     });
+  });
+
+  /** FileManagerEntry 对象工厂，用于拖拽 payload */
+  function mkDragEntry(name: string, path: string, isDir: boolean) {
+    return {
+      name,
+      path,
+      isDirectory: () => isDir,
+      isFile: () => !isDir,
+      isSymbolicLink: () => false,
+    };
+  }
+
+  /**
+   * CList 不转发 onItemDragInto 到 DOM，需通过 React fiber 树向上遍历获取。
+   * 参见 T7: src/lib/fileManager/fileManager.test.tsx
+   */
+  function getCListDragIntoHandler() {
+    const clistEl = document.querySelector('.cm-list');
+    if (!clistEl) throw new Error('CList not rendered — .cm-list not found');
+
+    const fiberKey = Object.keys(clistEl).find((k) => k.startsWith('__reactFiber$'));
+    if (!fiberKey) throw new Error('React fiber key not found on .cm-list element');
+
+    let fiber = (clistEl as any)[fiberKey];
+    while (fiber) {
+      if (typeof fiber.memoizedProps?.onItemDragInto === 'function') {
+        return fiber.memoizedProps.onItemDragInto as (
+          payload: {
+            source: { item: ReturnType<typeof mkDragEntry>; key: string; index: number };
+            target: { item: ReturnType<typeof mkDragEntry>; key: string; index: number };
+            position: 'inside';
+            input: string;
+          }
+        ) => void;
+      }
+      fiber = fiber.return;
+    }
+    throw new Error('onItemDragInto not found in React fiber tree above .cm-list');
+  }
+
+  it('move error propagates to outer Demo error state without internal buttons', async () => {
+    mockFs.promises.rename.mockRejectedValueOnce(new Error('disk full'));
+
+    render(<FileBrowserWindow {...makeProps()} />);
+
+    await waitFor(() => {
+      expect(getItemButtons().length).toBeGreaterThan(0);
+    });
+
+    // Given: 通过 fiber 树拿到 CList 的 onItemDragInto 回调
+    const handler = getCListDragIntoHandler();
+
+    // When: 拖拽 test.txt 到 docs 文件夹，rename 拒绝
+    await act(async () => {
+      await handler({
+        source: { item: mkDragEntry('test.txt', '/test.txt', false), key: '/test.txt', index: 0 },
+        target: { item: mkDragEntry('docs', '/docs', true), key: '/docs', index: 1 },
+        position: 'inside',
+        input: 'pointer',
+      });
+    });
+
+    // Then: 错误信息显示在 Demo 外层（FileManager 列表外部）
+    await waitFor(() => {
+      expect(screen.getByText(/移动失败/)).toBeInTheDocument();
+    });
+
+    const errorEl = screen.getByText(/移动失败/);
+    const list = document.querySelector('.cm-list');
+    expect(list).not.toBeNull();
+    expect(list!.contains(errorEl)).toBe(false);
   });
 });

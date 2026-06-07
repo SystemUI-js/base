@@ -1,0 +1,18 @@
+# Task T2 Evidence — Preserve default rendering while adding renderItem inputs
+# Date: 2026-06-07
+
+## yarn build output
+$ yarn build
+✓ built in 33ms (lib)
+✓ built in 370ms (demo)
+Done in 2.71s. (exit 0)
+
+## LSP diagnostics
+Only pre-existing biome import info — zero errors.
+
+## Existing tests (yarn test src/lib/fileManager/fileManager.test.tsx --run)
+Test Files  1 passed (1)
+     Tests  11 passed (11)
+  Duration  972ms
+
+All 11 pre-existing tests still pass after T2 changes.

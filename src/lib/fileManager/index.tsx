@@ -7,8 +7,17 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { CList } from '@system-ui-js/chameleon'
-import type { CListItemDoubleClickPayload } from '@system-ui-js/chameleon'
-import type { FileManagerProps, FileManagerDirent } from './types'
+import type {
+  CListItemDoubleClickPayload,
+  CListItemDragIntoPayload,
+} from '@system-ui-js/chameleon'
+import type {
+  FileManagerProps,
+  FileManagerDirent,
+  FileManagerEntryInfo,
+  FileManagerMoveContext,
+  FileManagerMoveError,
+} from './types'
 import { normalizePath, joinPath, clampToRoot } from './path'
 import './index.css'
 
@@ -19,6 +28,26 @@ interface FileManagerEntry {
   isDirectory: () => boolean
   isFile?: () => boolean
   isSymbolicLink?: () => boolean
+}
+
+function toEntryInfo(entry: FileManagerEntry): FileManagerEntryInfo {
+  return {
+    name: entry.name,
+    path: entry.path,
+    isDirectory: entry.isDirectory(),
+    isFile: entry.isFile?.(),
+    isSymbolicLink: entry.isSymbolicLink?.(),
+  }
+}
+
+function parentOf(path: string): string {
+  const normalizedPath = normalizePath(path)
+  if (normalizedPath === '/') {
+    return '/'
+  }
+
+  const lastSlashIndex = normalizedPath.lastIndexOf('/')
+  return lastSlashIndex > 0 ? normalizedPath.slice(0, lastSlashIndex) : '/'
 }
 
 /**
@@ -42,13 +71,28 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
     refreshKey,
     className,
     'data-testid': dataTestId,
+    displayMode = 'list',
+    sizeRatio = 1,
+    renderItem: customRenderItem,
+    draggable = false,
+    onBeforeMove,
+    onMoveSuccess,
+    onMoveError,
   } = props
+
+  /** 夹紧 sizeRatio：非有限值取 1，否则限制在 [0, 1] */
+  const effectiveSizeRatio = Number.isFinite(sizeRatio)
+    ? Math.max(0, Math.min(1, sizeRatio))
+    : 1
 
   const [items, setItems] = useState<FileManagerEntry[]>([])
   const [error, setError] = useState<string | null>(null)
   const [lastReadPath, setLastReadPath] = useState<string | null>(null)
   const [lastRefreshKey, setLastRefreshKey] = useState<unknown>(undefined)
+  const [lastInternalRefreshTick, setLastInternalRefreshTick] = useState(0)
+  const [internalRefreshTick, setInternalRefreshTick] = useState(0)
   const requestIdRef = useRef(0)
+  const moveInFlightRef = useRef(false)
 
   /** 规范化根路径与当前路径，并限制读取范围 */
   const normalizedRoot = normalizePath(root)
@@ -56,7 +100,10 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
   const readPath = clampToRoot(normalizedCurrentPath, normalizedRoot)
 
   /** 是否正在加载：当最后完成的路径/刷新键与当前不一致时视为加载中 */
-  const loading = lastReadPath !== readPath || lastRefreshKey !== refreshKey
+  const loading =
+    lastReadPath !== readPath ||
+    lastRefreshKey !== refreshKey ||
+    lastInternalRefreshTick !== internalRefreshTick
 
   /** 加载目录内容 */
   useEffect(() => {
@@ -81,6 +128,7 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
         setError(null)
         setLastReadPath(readPath)
         setLastRefreshKey(refreshKey)
+        setLastInternalRefreshTick(internalRefreshTick)
       })
       .catch((err: unknown) => {
         if (requestId !== requestIdRef.current) {
@@ -91,8 +139,9 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
         setError(err instanceof Error ? err.message : String(err))
         setLastReadPath(readPath)
         setLastRefreshKey(refreshKey)
+        setLastInternalRefreshTick(internalRefreshTick)
       })
-  }, [fileSystem, readPath, refreshKey])
+  }, [fileSystem, readPath, refreshKey, internalRefreshTick])
 
   /** 处理点击事件：选择，触摸模式下二次点击打开目录 */
   const handleItemClick = useCallback(
@@ -137,9 +186,148 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
     [onPathChange]
   )
 
-  /** 渲染单个文件/目录项 */
-  const renderItem = useCallback(
-    (entry: FileManagerEntry): React.ReactNode => {
+  const handleItemDragInto = useCallback(
+    async (payload: CListItemDragIntoPayload<FileManagerEntry>) => {
+      if (!draggable) {
+        return
+      }
+
+      if (payload.position !== 'inside') {
+        return
+      }
+
+      const source = payload.source.item
+      const target = payload.target.item
+      const targetPath = joinPath(target.path, source.name)
+      const context: FileManagerMoveContext = {
+        source: toEntryInfo(source),
+        target: toEntryInfo(target),
+        targetPath,
+        currentPath,
+      }
+
+      if (!target.isDirectory()) {
+        onMoveError?.(
+          {
+            reason: 'invalid-target',
+            message: '只能移动到文件夹中',
+          },
+          context
+        )
+        return
+      }
+
+      if (source.path === '/') {
+        onMoveError?.(
+          {
+            reason: 'invalid-target',
+            message: '不能移动根路径',
+          },
+          context
+        )
+        return
+      }
+
+      if (source.path === target.path) {
+        onMoveError?.(
+          {
+            reason: 'self-target',
+            message: '不能移动到自身',
+          },
+          context
+        )
+        return
+      }
+
+      if (source.isDirectory() && target.path.startsWith(`${source.path}/`)) {
+        onMoveError?.(
+          {
+            reason: 'descendant-target',
+            message: '不能移动到自己的子目录中',
+          },
+          context
+        )
+        return
+      }
+
+      if (parentOf(source.path) === target.path) {
+        return
+      }
+
+      if (moveInFlightRef.current) {
+        return
+      }
+
+      moveInFlightRef.current = true
+      try {
+        const exists = fileSystem.promises.exists
+        if (typeof exists === 'function' && (await exists(targetPath))) {
+          onMoveError?.(
+            {
+              reason: 'conflict',
+              message: '目标路径已存在',
+            },
+            context
+          )
+          return
+        }
+
+        if (onBeforeMove && (await onBeforeMove(context)) === false) {
+          onMoveError?.(
+            {
+              reason: 'cancelled',
+              message: '移动已取消',
+            },
+            context
+          )
+          return
+        }
+
+        await fileSystem.promises.rename(source.path, targetPath)
+        setInternalRefreshTick((tick) => tick + 1)
+
+        if (selectedPath === source.path) {
+          onSelectionChange?.(null)
+        }
+
+        await onMoveSuccess?.(context)
+      } catch (err: unknown) {
+        const error: FileManagerMoveError = {
+          reason: 'rename-failed',
+          message: err instanceof Error ? err.message : String(err),
+          cause: err,
+        }
+        onMoveError?.(error, context)
+      } finally {
+        moveInFlightRef.current = false
+      }
+    },
+    [
+      draggable,
+      fileSystem,
+      currentPath,
+      selectedPath,
+      onBeforeMove,
+      onMoveSuccess,
+      onMoveError,
+      onSelectionChange,
+    ]
+  )
+
+  /** 渲染单个文件/目录项：customRenderItem 存在时委托，否则使用默认 emoji 渲染 */
+  const renderListItem = useCallback(
+    (entry: FileManagerEntry, index: number): React.ReactNode => {
+      if (customRenderItem) {
+        const entryInfo: FileManagerEntryInfo = {
+          name: entry.name,
+          path: entry.path,
+          isDirectory: entry.isDirectory(),
+          isFile: entry.isFile?.(),
+          isSymbolicLink: entry.isSymbolicLink?.(),
+        }
+        return customRenderItem(displayMode, effectiveSizeRatio, entryInfo, index)
+      }
+
       const isSelected = entry.path === selectedPath
       const isDirectory = entry.isDirectory()
 
@@ -162,7 +350,7 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
         </div>
       )
     },
-    [selectedPath]
+    [selectedPath, customRenderItem, displayMode, effectiveSizeRatio]
   )
 
   /** 空列表时展示的加载/错误/空态节点 */
@@ -187,16 +375,24 @@ export default function FileManager(props: FileManagerProps): React.ReactElement
 
   return (
     <div
-      className={['system-ui-js__file-manager', className || ''].join(' ').trim()}
+      className={[
+        'system-ui-js__file-manager',
+        `system-ui-js__file-manager--${displayMode}`,
+        className || '',
+      ]
+        .join(' ')
+        .trim()}
       data-testid={dataTestId}
     >
       <CList<FileManagerEntry>
-        type="list"
+        type={displayMode}
         items={items}
-        renderItem={renderItem}
+        renderItem={renderListItem}
         getItemKey={(entry) => entry.path}
         onItemClick={handleItemClick}
         onItemDoubleClick={handleItemDoubleClick}
+        draggable={draggable}
+        onItemDragInto={handleItemDragInto}
         emptyState={emptyState}
       />
     </div>

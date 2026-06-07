@@ -1,0 +1,7 @@
+=== Command: npx --yes @fission-ai/openspec@1.4.1 validate add-file-manager-drag-move --strict ===
+Exit code: 0
+Elapsed: 2s
+--- Last 20 lines ---
+Change 'add-file-manager-drag-move' is valid
+--- Full output below ---
+Change 'add-file-manager-drag-move' is valid

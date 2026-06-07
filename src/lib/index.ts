@@ -11,8 +11,14 @@ export {
 
 export type {
   FileManagerDirent,
+  FileManagerDisplayMode,
+  FileManagerEntryInfo,
   FileManagerInteractionMode,
+  FileManagerMoveContext,
+  FileManagerMoveError,
+  FileManagerMoveErrorReason,
   FileManagerProps,
+  FileManagerRenderPosition,
   FileSystemLike,
 } from './fileManager/types';
 

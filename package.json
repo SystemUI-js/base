@@ -31,7 +31,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "pw:install": "playwright install --with-deps chromium",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@system-ui-js/chameleon": "file:.yalc/@system-ui-js/chameleon",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.60.0",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",

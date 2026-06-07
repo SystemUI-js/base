@@ -1,0 +1,31 @@
+=== Command: yarn test:run ===
+Exit code: 0
+Elapsed: 1s
+--- Last 20 lines ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  6 passed (6)
+      Tests  82 passed (82)
+   Start at  10:37:28
+   Duration  1.50s (transform 411ms, setup 976ms, import 715ms, tests 1.00s, environment 4.09s)
+
+Done in 1.82s.
+--- Full output below ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  6 passed (6)
+      Tests  82 passed (82)
+   Start at  10:37:28
+   Duration  1.50s (transform 411ms, setup 976ms, import 715ms, tests 1.00s, environment 4.09s)
+
+Done in 1.82s.

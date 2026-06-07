@@ -1,0 +1,856 @@
+diff --git a/src/demo/file-browser-window.test.tsx b/src/demo/file-browser-window.test.tsx
+index 4b2b111..13ad7f9 100644
+--- a/src/demo/file-browser-window.test.tsx
++++ b/src/demo/file-browser-window.test.tsx
+@@ -8,7 +8,6 @@ const testEntries: FileManagerDirent[] = [
+ ];
+ 
+ vi.mock('@system-ui-js/file-system-browser', () => {
+-  // vi.mock 工厂被提升到顶部，内部不能引用外部变量
+   const readdir = vi.fn<(...args: any[]) => Promise<FileManagerDirent[]>>()
+     .mockResolvedValue([
+       { name: 'test.txt', isDirectory: () => false, isFile: () => true, isSymbolicLink: () => false },
+@@ -16,18 +15,15 @@ vi.mock('@system-ui-js/file-system-browser', () => {
+     ]);
+   const rm = vi.fn().mockResolvedValue(undefined);
+   const writeFile = vi.fn().mockResolvedValue(undefined);
++  const mkdir = vi.fn().mockResolvedValue(undefined);
+ 
+   return {
+-    default: { promises: { readdir, rm, writeFile } },
++    default: { promises: { readdir, rm, writeFile, mkdir } },
+     registerPlugin: vi.fn(),
+     usePlugin: vi.fn(),
+   };
+ });
+ 
+-vi.mock('@system-ui-js/file-system-plugin-memory', () => ({
+-  createMemoryStoragePlugin: {},
+-}));
+-
+ import { FileBrowserWindow } from './file-browser-window';
+ 
+ // 重新导入被 mock 的模块，获取工厂内部创建的 mock 引用
+@@ -37,6 +33,7 @@ const mockFs = fsBrowserModule.default as {
+     readdir: ReturnType<typeof vi.fn>;
+     rm: ReturnType<typeof vi.fn>;
+     writeFile: ReturnType<typeof vi.fn>;
++    mkdir: ReturnType<typeof vi.fn>;
+   };
+ };
+ 
+@@ -47,7 +44,7 @@ function getItemButtons(): HTMLElement[] {
+ }
+ 
+ function makeProps() {
+-  const state = { windows: [], closeWindow: vi.fn() };
++  const state = { windows: [], closeWindow: vi.fn(), setWindowState: vi.fn() };
+   const store = {
+     getState: () => state,
+     setState: () => {},
+@@ -72,7 +69,7 @@ describe('FileBrowserWindow external controls', () => {
+     mockFs.promises.writeFile.mockResolvedValue(undefined);
+   });
+ 
+-  it('renders Back/Forward/Delete/Upload controls outside the FileManager list', async () => {
++  it('renders Back/Forward/Delete/New Folder/Upload controls outside the FileManager list', async () => {
+     render(<FileBrowserWindow {...makeProps()} />);
+ 
+     await waitFor(() => {
+@@ -82,15 +79,17 @@ describe('FileBrowserWindow external controls', () => {
+     const backBtn = screen.getByText('← 返回');
+     const forwardBtn = screen.getByText('前进 →');
+     const deleteBtn = screen.getByText('删除');
++    const newFolderBtn = screen.getByText('新建文件夹');
+     const uploadBtn = screen.getByText('上传');
+ 
+     expect(backBtn).toBeInTheDocument();
+     expect(forwardBtn).toBeInTheDocument();
+     expect(deleteBtn).toBeInTheDocument();
++    expect(newFolderBtn).toBeInTheDocument();
+     expect(uploadBtn).toBeInTheDocument();
+ 
+     const listItems = getItemButtons();
+-    for (const btn of [backBtn, forwardBtn, deleteBtn, uploadBtn]) {
++    for (const btn of [backBtn, forwardBtn, deleteBtn, newFolderBtn, uploadBtn]) {
+       expect(listItems).not.toContain(btn);
+     }
+   });
+diff --git a/src/demo/file-browser-window.tsx b/src/demo/file-browser-window.tsx
+index 39c1fdf..c6ad46a 100644
+--- a/src/demo/file-browser-window.tsx
++++ b/src/demo/file-browser-window.tsx
+@@ -1,34 +1,46 @@
+ import type React from 'react';
+ import { useState, useCallback, useRef } from 'react';
+ import fs, { registerPlugin, usePlugin } from '@system-ui-js/file-system-browser';
+-import { createMemoryStoragePlugin } from '@system-ui-js/file-system-plugin-memory';
++import type { FsPluginFactory } from '@system-ui-js/file-system-browser';
+ import { CWindow, CWindowTitle, CButton } from '@system-ui-js/chameleon';
+ import type { UseBoundStore, StoreApi } from 'zustand';
+ import type { WindowManagerState } from '../lib/windowManager';
+ import FileManager from '../lib/fileManager';
+ import { joinPath } from '../lib/fileManager/path';
+ 
+-let fsInitialized = false;
+-
+-function initFileSystem() {
+-  if (fsInitialized) return;
+-
+-  try {
+-    registerPlugin('memory', createMemoryStoragePlugin);
+-  } catch {
+-    // ignore duplicate registration
+-  }
+-
+-  try {
+-    // biome-ignore lint/correctness/useHookAtTopLevel: usePlugin is not a React hook
+-    usePlugin('memory', { mountPath: '/memory' });
+-    fsInitialized = true;
+-  } catch (error) {
+-    console.error('Failed to initialize file system:', error);
+-  }
+-}
++const createIndexedDBPlugin: FsPluginFactory = (_options, ctx) => {
++  return {
++    match: /^/,
++    handlers: {
++      readFile: ctx.baseFs.readFile,
++      writeFile: ctx.baseFs.writeFile,
++      appendFile: ctx.baseFs.appendFile,
++      rename: ctx.baseFs.rename,
++      copyFile: ctx.baseFs.copyFile,
++      mkdir: ctx.baseFs.mkdir,
++      readdir: ctx.baseFs.readdir,
++      rm: ctx.baseFs.rm,
++      unlink: ctx.baseFs.unlink,
++      rmdir: ctx.baseFs.rmdir,
++      stat: ctx.baseFs.stat,
++      lstat: ctx.baseFs.lstat,
++      readlink: ctx.baseFs.readlink,
++      symlink: ctx.baseFs.symlink,
++      link: ctx.baseFs.link,
++      exists: ctx.baseFs.exists,
++      access: ctx.baseFs.access,
++      nlink: ctx.baseFs.nlink,
++      open: ctx.baseFs.open,
++      read: ctx.baseFs.read,
++      write: ctx.baseFs.write,
++      close: ctx.baseFs.close,
++      requestPersistentStorage: ctx.baseFs.requestPersistentStorage,
++      diskUsage: ctx.baseFs.diskUsage,
++    },
++  };
++};
+ 
+-initFileSystem();
++registerPlugin('indexeddb', createIndexedDBPlugin);
+ 
+ interface FileBrowserWindowProps {
+   title: string;
+@@ -36,11 +48,22 @@ interface FileBrowserWindowProps {
+   store: UseBoundStore<StoreApi<WindowManagerState>>;
+   screenId: string;
+   windowProps: { title: string; id: string };
++  fullscreen?: boolean;
++  active?: boolean;
++  style?: React.CSSProperties;
++  x?: number;
++  y?: number;
++  width?: number;
++  height?: number;
++  onPointerDown?: () => void;
+ }
+ 
+ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
+-  const { screenId, windowProps, store, id, ...restProps } = props;
+-  const [currentPath, setCurrentPath] = useState('/memory');
++  const { windowProps, store, ...windowRestProps } = props;
++  
++  usePlugin('indexeddb', { mountPath: '/' });
++  
++  const [currentPath, setCurrentPath] = useState('/');
+   const [selectedPath, setSelectedPath] = useState<string | null>(null);
+   const [backStack, setBackStack] = useState<string[]>([]);
+   const [forwardStack, setForwardStack] = useState<string[]>([]);
+@@ -95,6 +118,20 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
+     }
+   }, [selectedPath]);
+ 
++  const handleNewFolder = useCallback(async () => {
++    const folderName = prompt('请输入新文件夹名称:');
++    if (!folderName) return;
++    try {
++      setError(null);
++      const newPath = joinPath(currentPath, folderName);
++      await fs.promises.mkdir(newPath, { recursive: true });
++      setRefreshKey((k) => k + 1);
++    } catch (err) {
++      console.error('Failed to create folder:', err);
++      setError(`创建文件夹失败: ${(err as Error).message}`);
++    }
++  }, [currentPath]);
++
+   const handleUploadClick = useCallback(() => {
+     fileInputRef.current?.click();
+   }, []);
+@@ -123,12 +160,14 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
+   );
+ 
+   return (
+-    <CWindow width={500} height={400} {...restProps}>
++    <CWindow width={500} height={400} {...windowRestProps}>
+       <CWindowTitle
+         actionButton={
+-          <CButton showFocusEffect={false} onClick={closeWindow}>
+-            x
+-          </CButton>
++          <>
++            <CButton showFocusEffect={false} onClick={closeWindow} aria-label="关闭">
++              x
++            </CButton>
++          </>
+         }
+       >
+         {windowProps.title}
+@@ -144,6 +183,9 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
+           <CButton onClick={() => { void handleDelete(); }} disabled={!selectedPath}>
+             删除
+           </CButton>
++          <CButton onClick={() => { void handleNewFolder(); }}>
++            新建文件夹
++          </CButton>
+           <CButton onClick={handleUploadClick}>上传</CButton>
+           <input
+             ref={fileInputRef}
+@@ -164,7 +206,7 @@ export const FileBrowserWindow = (props: FileBrowserWindowProps) => {
+ 
+         <FileManager
+           fileSystem={fs}
+-          root="/memory"
++          root="/"
+           currentPath={currentPath}
+           onPathChange={handlePathChange}
+           selectedPath={selectedPath}
+diff --git a/src/demo/windows-desktop-demo.test.tsx b/src/demo/windows-desktop-demo.test.tsx
+index bae495c..6eeb3e4 100644
+--- a/src/demo/windows-desktop-demo.test.tsx
++++ b/src/demo/windows-desktop-demo.test.tsx
+@@ -1,127 +1,167 @@
+ import { describe, it, expect, afterEach } from 'vitest';
+ import { render, screen, fireEvent, act } from '@testing-library/react';
+ import { WindowsDesktopDemo } from './windows-desktop-demo';
++import { getWindowManagerStore } from '../lib/windowManager';
+ 
+ afterEach(() => {
+-  for (const el of document.querySelectorAll('.sb-window-manager-window')) el.remove();
+-  for (const el of document.querySelectorAll('.sb-window-manager-host')) el.remove();
++  for (const el of document.querySelectorAll('.cm-window-frame')) el.remove();
++  getWindowManagerStore().setState({ screens: [] });
+ });
+ 
+-function getCreateButton() {
+-  const buttons = screen.getAllByText('开始');
+-  expect(buttons.length).toBeGreaterThan(1);
+-  return buttons[1];
++function getWindowFrames(): NodeListOf<Element> {
++  return document.querySelectorAll('.cm-window-frame');
++}
++
++function getWindowFrame(): Element | null {
++  return document.querySelector('.cm-window-frame');
++}
++
++function isFullscreen(wrapper: Element | null): boolean {
++  return wrapper?.classList.contains('cm-window--fullscreen') ?? false;
++}
++
++function isActive(wrapper: Element | null): boolean {
++  return wrapper?.classList.contains('cm-widget--active') ?? false;
++}
++
++function getZIndex(wrapper: Element | null): number {
++  return wrapper ? Number((wrapper as HTMLElement).style.zIndex) : 0;
++}
++
++function getGeometry(wrapper: Element | null) {
++  const el = wrapper as HTMLElement | null;
++  return {
++    left: el?.style.left,
++    top: el?.style.top,
++    width: el?.style.width,
++    height: el?.style.height,
++  };
+ }
+ 
+ describe('WindowsDesktopDemo', () => {
+-  it('creates a window when clicking 开始 button', async () => {
++  it('renders an initial demo window', async () => {
++    render(<WindowsDesktopDemo />);
++    await act(async () => {});
++    expect(getWindowFrames().length).toBe(1);
++  });
++
++  it('creates a new window via the + button', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    expect(document.querySelectorAll('.sb-window-manager-window').length).toBe(1);
++    await act(async () => {});
++    const plusButton = screen.getByText('+');
++    await act(async () => fireEvent.click(plusButton));
++    expect(getWindowFrames().length).toBe(2);
+   });
+ 
+   it('closes a window via titlebar close button', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
++    await act(async () => {});
+     const closeButton = document.querySelector('[aria-label="关闭"]');
+     if (closeButton) {
+       await act(async () => fireEvent.click(closeButton));
+     }
+-    expect(document.querySelectorAll('.sb-window-manager-window').length).toBe(0);
+-  });
+-
+-  it('minimizes a window via titlebar minimize button', async () => {
+-    render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const minimizeButton = screen.getByLabelText('最小化');
+-    await act(async () => fireEvent.click(minimizeButton));
+-    const wrapper = document.querySelector('.sb-window-manager-window');
+-    expect(wrapper?.getAttribute('data-window-state')).toBe('minimized');
+-  });
+-
+-  it('maximizes a window via titlebar maximize button', async () => {
+-    render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const maximizeButton = screen.getByLabelText('最大化');
+-    await act(async () => fireEvent.click(maximizeButton));
+-    const wrapper = document.querySelector('.sb-window-manager-window');
+-    expect(wrapper?.getAttribute('data-window-state')).toBe('maximized');
+-    const geom = wrapper?.querySelector('.sb-window-manager-geometry');
+-    expect(geom?.getAttribute('data-x')).toBe('0');
+-    expect(geom?.getAttribute('data-y')).toBe('0');
+-    expect(geom?.getAttribute('data-width')).toBe('100%');
+-    expect(geom?.getAttribute('data-height')).toBe('100%');
++    expect(getWindowFrames().length).toBe(0);
+   });
+ 
+   it('focuses a window via status bar click', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const statusButtons = screen.getAllByText(/窗口 \d+/);
++    await act(async () => {});
++    const plusButton = screen.getByText('+');
++    await act(async () => fireEvent.click(plusButton));
++    const statusButtons = screen.getAllByText(/Demo Window|New Window/);
+     expect(statusButtons.length).toBeGreaterThan(0);
+     await act(async () => fireEvent.click(statusButtons[0]));
+-    const wrappers = document.querySelectorAll('.sb-window-manager-window');
+-    expect(wrappers[0]?.getAttribute('data-window-active')).toBe('true');
++    const wrappers = getWindowFrames();
++    expect(isActive(wrappers[0])).toBe(true);
+   });
+ 
+   it('brings older window to front on status bar click', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const statusButtons = screen.getAllByText(/窗口 \d+/);
++    await act(async () => {});
++    const plusButton = screen.getByText('+');
++    await act(async () => fireEvent.click(plusButton));
++    const statusButtons = screen.getAllByText(/Demo Window|New Window/);
+     expect(statusButtons.length).toBeGreaterThan(0);
+     await act(async () => fireEvent.click(statusButtons[0]));
+-    const wrappers = document.querySelectorAll('.sb-window-manager-window');
+-    const z0 = Number(wrappers[0]?.getAttribute('data-window-z-index'));
+-    const z1 = Number(wrappers[1]?.getAttribute('data-window-z-index'));
++    const wrappers = getWindowFrames();
++    const z0 = getZIndex(wrappers[0]);
++    const z1 = getZIndex(wrappers[1]);
+     expect(z0).toBeGreaterThan(z1);
+-    expect(wrappers[0]?.getAttribute('data-window-active')).toBe('true');
+-    expect(wrappers[1]?.getAttribute('data-window-active')).toBe('false');
++    expect(isActive(wrappers[0])).toBe(true);
++    expect(isActive(wrappers[1])).toBe(false);
+   });
+ 
+-  it('restores minimized window via status bar click', async () => {
++  it('toggles fullscreen via content fullscreen button', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const minimizeButton = screen.getByLabelText('最小化');
+-    await act(async () => fireEvent.click(minimizeButton));
+-    const statusButton = document.querySelector('[data-status-minimized="true"]');
+-    expect(statusButton).not.toBeNull();
+-    await act(async () => fireEvent.click(statusButton));
+-    const wrapper = document.querySelector('.sb-window-manager-window');
+-    expect(wrapper?.getAttribute('data-window-state')).toBe('normal');
+-    expect(wrapper?.getAttribute('data-window-active')).toBe('true');
++    await act(async () => {});
++    const fullscreenButton = screen.getByLabelText('全屏');
++    await act(async () => fireEvent.click(fullscreenButton));
++    const wrapper = getWindowFrame();
++    expect(isFullscreen(wrapper)).toBe(true);
++    const geom = getGeometry(wrapper);
++    expect(geom.left).toBe('0px');
++    expect(geom.top).toBe('0px');
++    expect(geom.width).toBe('800px');
++    expect(geom.height).toBe('600px');
+   });
+ 
+-  it('restores normal geometry after toggling maximize twice', async () => {
++  it('restores fullscreen window to normal via content restore button', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const maximizeButton = screen.getByLabelText('最大化');
+-    await act(async () => fireEvent.click(maximizeButton));
+-    let wrapper = document.querySelector('.sb-window-manager-window');
+-    expect(wrapper?.getAttribute('data-window-state')).toBe('maximized');
+-    const restoreButton = screen.getByLabelText('还原');
++    await act(async () => {});
++    const fullscreenButton = screen.getByLabelText('全屏');
++    await act(async () => fireEvent.click(fullscreenButton));
++    let wrapper = getWindowFrame();
++    expect(isFullscreen(wrapper)).toBe(true);
++    const restoreButton = screen.getByLabelText('退出全屏');
+     await act(async () => fireEvent.click(restoreButton));
+-    wrapper = document.querySelector('.sb-window-manager-window');
+-    expect(wrapper?.getAttribute('data-window-state')).toBe('normal');
+-    const geom = wrapper?.querySelector('.sb-window-manager-geometry');
+-    expect(geom?.getAttribute('data-x')).not.toBe('0');
+-    expect(geom?.getAttribute('data-y')).not.toBe('0');
+-    expect(geom?.getAttribute('data-width')).not.toBe('100%');
+-    expect(geom?.getAttribute('data-height')).not.toBe('100%');
++    wrapper = getWindowFrame();
++    expect(isFullscreen(wrapper)).toBe(false);
++    const geom = getGeometry(wrapper);
++    expect(geom.left).not.toBe('0px');
++    expect(geom.top).not.toBe('0px');
++    expect(geom.width).not.toBe('800px');
++    expect(geom.height).not.toBe('600px');
+   });
+ 
+-  it('assigns staggered positions to new windows', async () => {
++  it('closes a fullscreen window normally', async () => {
++    render(<WindowsDesktopDemo />);
++    await act(async () => {});
++    const fullscreenButton = screen.getByLabelText('全屏');
++    await act(async () => fireEvent.click(fullscreenButton));
++    const wrapper = getWindowFrame();
++    expect(isFullscreen(wrapper)).toBe(true);
++    const closeButton = document.querySelector('[aria-label="关闭"]');
++    if (closeButton) {
++      await act(async () => fireEvent.click(closeButton));
++    }
++    expect(getWindowFrames().length).toBe(0);
++  });
++
++  it('allows multiple windows to independently toggle fullscreen', async () => {
+     render(<WindowsDesktopDemo />);
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const geom1 = document.querySelector('.sb-window-manager-window .sb-window-manager-geometry');
+-    expect(geom1?.getAttribute('data-x')).toBe('30');
+-    expect(geom1?.getAttribute('data-y')).toBe('30');
+-    
+-    await act(async () => fireEvent.click(getCreateButton()));
+-    const geoms = document.querySelectorAll('.sb-window-manager-window .sb-window-manager-geometry');
+-    expect(geoms[1]?.getAttribute('data-x')).toBe('60');
+-    expect(geoms[1]?.getAttribute('data-y')).toBe('60');
++    await act(async () => {});
++    const plusButton = screen.getByText('+');
++    await act(async () => fireEvent.click(plusButton));
++    const fullscreenButtons = screen.getAllByLabelText('全屏');
++    expect(fullscreenButtons.length).toBe(2);
++    await act(async () => fireEvent.click(fullscreenButtons[0]));
++    const wrappers = getWindowFrames();
++    expect(isFullscreen(wrappers[0])).toBe(true);
++    expect(isFullscreen(wrappers[1])).toBe(false);
+   });
+-});
+ 
++  it('assigns staggered positions to new windows', async () => {
++    render(<WindowsDesktopDemo />);
++    await act(async () => {});
++    const geom1 = getGeometry(getWindowFrame());
++    expect(geom1.left).toBe('30px');
++    expect(geom1.top).toBe('30px');
+ 
++    const plusButton = screen.getByText('+');
++    await act(async () => fireEvent.click(plusButton));
++    const wrappers = getWindowFrames();
++    const geom2 = getGeometry(wrappers[1]);
++    expect(geom2.left).toBe('60px');
++    expect(geom2.top).toBe('60px');
++  });
++});
+diff --git a/src/demo/windows-desktop-demo.tsx b/src/demo/windows-desktop-demo.tsx
+index 9efbdd7..b55fb4c 100644
+--- a/src/demo/windows-desktop-demo.tsx
++++ b/src/demo/windows-desktop-demo.tsx
+@@ -1,7 +1,7 @@
+ import { useCallback, useEffect, useRef } from 'react';
+ import SystemComponent from '../lib/system';
+ import type { WindowManagerState } from '../lib/windowManager';
+-import { barComponentRegistry, BarPosition, generateId, getWindowManagerStore, windowContentRegistry } from '../lib/windowManager';
++import { barComponentRegistry, BarPosition, generateId, getWindowManagerStore, windowContentRegistry, WindowState } from '../lib/windowManager';
+ import type { StoreApi, UseBoundStore } from 'zustand';
+ import { CButton, CWindow, CWindowTitle, CStartBar } from '@system-ui-js/chameleon';
+ import { FileBrowserWindow } from './file-browser-window';
+@@ -14,10 +14,18 @@ interface DemoWindowContentProps {
+   store: UseBoundStore<StoreApi<WindowManagerState>>;
+   screenId: string;
+   windowProps: { title: string; content: string; id: string };
++  fullscreen?: boolean;
++  active?: boolean;
++  style?: React.CSSProperties;
++  x?: number;
++  y?: number;
++  width?: number;
++  height?: number;
++  onPointerDown?: () => void;
+ }
+ 
+ export const DemoWindowContent = (props: DemoWindowContentProps) => {
+-  const { screenId, windowProps, store, id, ...restProps } = props;
++  const { screenId, windowProps, store, fullscreen: isFullscreen, ...windowRestProps } = props;
+   const closeWindow = useCallback(() => {
+     store.getState().closeWindow(props.id);
+   }, [props.id, store]);
+@@ -29,15 +37,22 @@ export const DemoWindowContent = (props: DemoWindowContentProps) => {
+       props: { title: `New Window ${newWindowId}`, content: 'This is a new window.', id: newWindowId, screenId: props.screenId },
+     }, screenId);
+   }, [screenId, props.screenId, store]);
++  const toggleFullscreen = useCallback(() => {
++    if (isFullscreen) {
++      store.getState().setWindowState(props.id, WindowState.Normal);
++    } else {
++      store.getState().setWindowState(props.id, WindowState.Fullscreen);
++    }
++  }, [isFullscreen, props.id, store]);
+   return (
+-    <CWindow width={400} height={300} {...restProps}>
++    <CWindow width={400} height={300} {...(isFullscreen ? { fullscreen: true } : {})} {...windowRestProps}>
+       <CWindowTitle
+         actionButton={
+           <div>
+             <CButton showFocusEffect={false} onClick={createNewWindow}>
+               +
+             </CButton>
+-            <CButton showFocusEffect={false} onClick={closeWindow}>
++            <CButton showFocusEffect={false} onClick={closeWindow} aria-label="关闭">
+               x
+             </CButton>
+           </div>
+@@ -48,6 +63,11 @@ export const DemoWindowContent = (props: DemoWindowContentProps) => {
+       <div className="cm-window__body">
+         <h3>{windowProps.title}</h3>
+         <p>{windowProps.content}</p>
++        <div style={{ marginTop: '16px' }}>
++          <CButton onClick={toggleFullscreen} aria-label={isFullscreen ? '退出全屏' : '全屏'}>
++            {isFullscreen ? '退出全屏' : '全屏'}
++          </CButton>
++        </div>
+       </div>
+     </CWindow>
+   );
+diff --git a/src/lib/screen/index.tsx b/src/lib/screen/index.tsx
+index 2fd0f3d..6c16f89 100644
+--- a/src/lib/screen/index.tsx
++++ b/src/lib/screen/index.tsx
+@@ -3,6 +3,7 @@ import {
+   barComponentRegistry,
+   windowContentRegistry,
+   WindowManagerState,
++  WindowState,
+ } from '../windowManager';
+ import { StoreApi, UseBoundStore } from "zustand";
+ import "./index.css";
+@@ -50,6 +51,9 @@ export default function ScreenComponent(props: Props) {
+                 onPointerDown={() => props.windowManager.getState().focusWindow(window.id)}
+                 x={window.x}
+                 y={window.y}
++                width={window.width}
++                height={window.height}
++                fullscreen={window.state === WindowState.Fullscreen}
+               />
+             )
+           );
+diff --git a/src/lib/windowManager/index.ts b/src/lib/windowManager/index.ts
+index 164da19..bb90f80 100644
+--- a/src/lib/windowManager/index.ts
++++ b/src/lib/windowManager/index.ts
+@@ -39,6 +39,9 @@ export interface WindowListItem {
+     active: boolean;
+     x: number;
+     y: number;
++    width: number;
++    height: number;
++    savedGeometry?: { x: number; y: number; width: number; height: number };
+ }
+ 
+ export interface WindowManagerState {
+@@ -48,6 +51,7 @@ export interface WindowManagerState {
+     closeWindow: (windowId: string) => void;
+     focusWindow: (windowId: string) => void;
+     createBar: (bar: BarListItem, screen: string) => void;
++    setWindowState: (windowId: string, state: WindowState) => void;
+ }
+ 
+ let idCounter = 0;
+@@ -115,7 +119,9 @@ const windowManagerStore = create<WindowManagerState>()(((set, get) => ({
+             props: window.props || {},
+             type: window.type || '',
+             x: finalX,
+-            y: finalY
++            y: finalY,
++            width: window.width ?? DEFAULT_WIDTH,
++            height: window.height ?? DEFAULT_HEIGHT
+         };
+ 
+         console.log('Creating window:', newWindow, 'on screen:', screen);
+@@ -163,6 +169,49 @@ const windowManagerStore = create<WindowManagerState>()(((set, get) => ({
+             screens: updatedScreens
+         };
+     }),
++    setWindowState: (windowId: string, state: WindowState) => set((prev) => {
++        const updatedScreens = prev.screens.map(screen => ({
++            ...screen,
++            windows: screen.windows.map(window => {
++                if (window.id !== windowId) return window;
++
++                if (state === WindowState.Fullscreen) {
++                    // 保存当前几何信息，然后切换到全屏（占满整个屏幕）
++                    return {
++                        ...window,
++                        state,
++                        x: 0,
++                        y: 0,
++                        width: screen.size.width,
++                        height: screen.size.height,
++                        savedGeometry: {
++                            x: window.x,
++                            y: window.y,
++                            width: window.width,
++                            height: window.height
++                        }
++                    };
++                } else if (state === WindowState.Normal && window.savedGeometry) {
++                    // 恢复之前保存的几何信息
++                    const { savedGeometry, ...rest } = window;
++                    return {
++                        ...rest,
++                        state,
++                        x: savedGeometry.x,
++                        y: savedGeometry.y,
++                        width: savedGeometry.width,
++                        height: savedGeometry.height
++                    };
++                }
++
++                return { ...window, state };
++            })
++        }));
++        return {
++            ...prev,
++            screens: updatedScreens
++        };
++    }),
+ })));
+ 
+ export const getWindowManagerStore = () => windowManagerStore;
+diff --git a/src/lib/windowManager/windowManager.test.ts b/src/lib/windowManager/windowManager.test.ts
+index b77a365..e2a9a62 100644
+--- a/src/lib/windowManager/windowManager.test.ts
++++ b/src/lib/windowManager/windowManager.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, it, expect, beforeEach } from 'vitest';
+-import { getWindowManagerStore, WindowListItem } from './index';
++import { getWindowManagerStore, WindowListItem, WindowState } from './index';
+ 
+ describe('createWindow position staggering', () => {
+   let store: ReturnType<typeof getWindowManagerStore>;
+@@ -131,3 +131,181 @@ describe('createWindow position staggering', () => {
+     expect(lastWindow?.y).toBeLessThanOrEqual(100);
+   });
+ });
++
++describe('createWindow dimensions', () => {
++  let store: ReturnType<typeof getWindowManagerStore>;
++
++  beforeEach(() => {
++    store = getWindowManagerStore();
++    store.setState({ screens: [] });
++  });
++
++  it('should assign default width/height when no dimensions provided', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const window = screen?.windows[0];
++
++    expect(window).toBeDefined();
++    expect(window?.width).toBe(400);
++    expect(window?.height).toBe(300);
++  });
++
++  it('should preserve explicit width/height when provided', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({
++      type: 'test-window',
++      width: 800,
++      height: 600
++    }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const window = screen?.windows[0];
++
++    expect(window).toBeDefined();
++    expect(window?.width).toBe(800);
++    expect(window?.height).toBe(600);
++  });
++});
++
++describe('setWindowState fullscreen transitions', () => {
++  let store: ReturnType<typeof getWindowManagerStore>;
++
++  beforeEach(() => {
++    store = getWindowManagerStore();
++    store.setState({ screens: [] });
++  });
++
++  it('should transition from Normal to Fullscreen', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const windowId = screen!.windows[0]!.id;
++
++    expect(screen!.windows[0]!.state).toBe(WindowState.Normal);
++
++    store.getState().setWindowState(windowId, WindowState.Fullscreen);
++
++    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
++    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Fullscreen);
++  });
++
++  it('should transition from Fullscreen back to Normal', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const windowId = screen!.windows[0]!.id;
++
++    store.getState().setWindowState(windowId, WindowState.Fullscreen);
++    store.getState().setWindowState(windowId, WindowState.Normal);
++
++    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
++    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Normal);
++  });
++
++  it('should save and restore geometry during fullscreen transitions', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({
++      type: 'test-window',
++      x: 100,
++      y: 200,
++      width: 640,
++      height: 480
++    }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const windowId = screen!.windows[0]!.id;
++
++    const originalX = screen!.windows[0]!.x;
++    const originalY = screen!.windows[0]!.y;
++    const originalWidth = screen!.windows[0]!.width;
++    const originalHeight = screen!.windows[0]!.height;
++
++    store.getState().setWindowState(windowId, WindowState.Fullscreen);
++
++    const fullscreenScreen = store.getState().screens.find(s => s.id === 'screen-1');
++    expect(fullscreenScreen!.windows[0]!.x).toBe(0);
++    expect(fullscreenScreen!.windows[0]!.y).toBe(0);
++    expect(fullscreenScreen!.windows[0]!.width).toBe(1920);
++    expect(fullscreenScreen!.windows[0]!.height).toBe(1080);
++
++    store.getState().setWindowState(windowId, WindowState.Normal);
++
++    const restoredScreen = store.getState().screens.find(s => s.id === 'screen-1');
++    expect(restoredScreen!.windows[0]!.x).toBe(originalX);
++    expect(restoredScreen!.windows[0]!.y).toBe(originalY);
++    expect(restoredScreen!.windows[0]!.width).toBe(originalWidth);
++    expect(restoredScreen!.windows[0]!.height).toBe(originalHeight);
++  });
++
++  it('should no-op when setting state on unknown window ID', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({ type: 'test-window' }, 'screen-1');
++
++    const stateBefore = store.getState().screens;
++
++    store.getState().setWindowState('non-existent-window-id', WindowState.Fullscreen);
++
++    expect(store.getState().screens).toEqual(stateBefore);
++  });
++
++  it('should not affect other windows when changing one window state', () => {
++    store.getState().createScreen({
++      id: 'screen-1',
++      bars: [],
++      windows: [],
++      size: { width: 1920, height: 1080 }
++    });
++
++    store.getState().createWindow({ type: 'test-window-1' }, 'screen-1');
++    store.getState().createWindow({ type: 'test-window-2' }, 'screen-1');
++
++    const screen = store.getState().screens.find(s => s.id === 'screen-1');
++    const window1Id = screen!.windows[0]!.id;
++
++    store.getState().setWindowState(window1Id, WindowState.Fullscreen);
++
++    const updatedScreen = store.getState().screens.find(s => s.id === 'screen-1');
++    expect(updatedScreen!.windows[0]!.state).toBe(WindowState.Fullscreen);
++    expect(updatedScreen!.windows[1]!.state).toBe(WindowState.Normal);
++  });
++});

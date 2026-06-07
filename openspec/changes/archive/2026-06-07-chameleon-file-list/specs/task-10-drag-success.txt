@@ -1,0 +1,10 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ playwright test e2e/file-manager-drag.e2e.ts --grep 'happy path'
+
+Running 1 test using 1 worker
+
+  ✓  1 [chromium] › e2e/file-manager-drag.e2e.ts:121:3 › FileManager 拖拽移动 › happy path：把文件拖入文件夹后，文件出现在目标文件夹内 (720ms)
+
+  1 passed (1.3s)
+Done in 1.90s.

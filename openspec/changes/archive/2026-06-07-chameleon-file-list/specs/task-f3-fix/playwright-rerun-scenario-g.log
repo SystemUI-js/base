@@ -1,0 +1,22 @@
+Scenario G Playwright re-verification log
+==========================================
+Date: 2026-06-06
+Tool: Playwright (headless Chromium)
+
+=== Scenario G: Console clean ===
+PASS: No 'Received true for a non-boolean attribute fullscreen' warning found
+PASS: No 'fullscreen' related warnings in console
+
+=== All console messages ===
+[debug] [vite] connecting...
+[debug] [vite] connected.
+[info] %cDownload the React DevTools...
+[log] Creating window: ...
+[log] Focusing window: ... (x3)
+
+Note: Pre-existing warning about `screenId` prop (unrelated to fullscreen):
+  [error] React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. screenId screenid
+
+This warning is from `src/lib/screen/index.tsx` passing `screenId` to WindowComponent, which forwards it to the DOM. Not related to the fullscreen attribute bug.
+
+=== VERIFICATION PASSED ===
