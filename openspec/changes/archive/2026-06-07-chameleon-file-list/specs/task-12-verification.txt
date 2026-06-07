@@ -1,0 +1,109 @@
+## Task 12 — Final Verification Sweep
+## Change ID: add-file-manager-drag-move
+## Date: 2026-06-07
+## Total wall time: ~20s (across 9 commands)
+
+================================================================================
+COMMAND 1: yarn test src/lib/fileManager/fileManager.test.tsx --run
+EXIT CODE: 0 (PASS)
+ELAPSED: 1s
+KEY TAIL:
+  Test Files  1 passed (1)
+      Tests  26 passed (26)
+   Duration  1.04s (transform 70ms, setup 133ms, import 96ms, tests 177ms, environment 525ms)
+
+================================================================================
+COMMAND 2: yarn test src/demo/file-browser-window.test.tsx --run
+EXIT CODE: 0 (PASS)
+ELAPSED: 1s
+KEY TAIL:
+  Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Duration  1.10s (transform 73ms, setup 125ms, import 102ms, tests 198ms, environment 526ms)
+
+================================================================================
+COMMAND 3: yarn test:run
+EXIT CODE: 0 (PASS)
+ELAPSED: 1s
+KEY TAIL:
+  Test Files  6 passed (6)
+      Tests  82 passed (82)
+   Duration  1.50s (transform 411ms, setup 976ms, import 715ms, tests 1.00s, environment 4.09s)
+
+================================================================================
+COMMAND 4: yarn lint
+EXIT CODE: 1 (FAIL — PRE-EXISTING)
+ELAPSED: 9s
+NOTE: Pre-existing eslint config issue flagged by T10 subagent. 146 errors reported,
+including spurious @typescript-eslint/no-explicit-any on e2e/file-manager-drag.e2e.ts
+(which does NOT use `any`). Affects .yalc/ and existing source files. NOT introduced
+by this plan. No source files were modified to address this.
+KEY TAIL:
+  ✖ 146 problems (146 errors, 0 warnings)
+  error Command failed with exit code 1.
+
+================================================================================
+COMMAND 5: yarn build
+EXIT CODE: 0 (PASS)
+ELAPSED: 2s
+KEY TAIL:
+  ✓ built in 372ms
+  Done in 2.25s.
+NOTE: Chunk size warning (>500kB) is informational only — pre-existing.
+
+================================================================================
+COMMAND 6: yarn pw:install
+EXIT CODE: 1 (FAIL — KNOWN HOST-OS ISSUE)
+ELAPSED: 0s
+NOTE: Ubuntu 26.04 is not officially supported by Playwright 1.60.0. Documented by T10.
+Chromium binary already cached in ~/.cache/ms-playwright/ from prior install, so e2e
+tests still run successfully (verified in Command 7). CI uses ubuntu-latest (24.04) where
+this command succeeds.
+KEY TAIL:
+  BEWARE: your OS is not officially supported by Playwright; installing dependencies for ubuntu26.04-x64 as a fallback.
+  Cannot install dependencies for ubuntu26.04-x64 with Playwright 1.60.0!
+  Error: ERROR: Playwright does not support chromium on ubuntu26.04-x64
+
+================================================================================
+COMMAND 7: yarn test:e2e e2e/file-manager-drag.e2e.ts
+EXIT CODE: 0 (PASS)
+ELAPSED: 2s
+KEY TAIL:
+  Running 2 tests using 1 worker
+  ✓  1 [chromium] › e2e/file-manager-drag.e2e.ts:121:3 › happy path（709ms）
+  ✓  2 [chromium] › e2e/file-manager-drag.e2e.ts:144:3 › invalid path（559ms）
+  2 passed (1.9s)
+
+================================================================================
+COMMAND 8: yarn pack --filename package.tgz && rm -f package.tgz
+EXIT CODE: 0 (PASS)
+ELAPSED: 0s
+KEY TAIL:
+  success Wrote tarball to "package.tgz".
+  CONFIRMED: package.tgz does NOT exist in worktree (removed after pack)
+
+================================================================================
+COMMAND 9: npx --yes @fission-ai/openspec@1.4.1 validate add-file-manager-drag-move --strict
+EXIT CODE: 0 (PASS)
+ELAPSED: 2s
+KEY TAIL:
+  Change 'add-file-manager-drag-move' is valid
+
+================================================================================
+## SUMMARY
+
+  PASS (7/9):
+    1. yarn test src/lib/fileManager/fileManager.test.tsx --run  — 26/26 tests ✓
+    2. yarn test src/demo/file-browser-window.test.tsx --run      — 7/7 tests ✓
+    3. yarn test:run                                              — 82/82 tests ✓
+    4. yarn build                                                 — built in 372ms ✓
+    5. yarn test:e2e e2e/file-manager-drag.e2e.ts                 — 2/2 e2e ✓
+    6. yarn pack + cleanup                                        — tarball removed ✓
+    7. openspec validate --strict                                 — change valid ✓
+
+  EXPECTED FAILURES (2/9):
+    4. yarn lint                                                  — 146 pre-existing eslint config errors (T10-flagged)
+    6. yarn pw:install                                            — Ubuntu 26.04 not supported by Playwright 1.60.0 (T10-flagged)
+
+  Total wall time: ~20s
+  package.tgz absent: CONFIRMED

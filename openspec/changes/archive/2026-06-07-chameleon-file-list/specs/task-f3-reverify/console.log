@@ -1,0 +1,43 @@
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 2"}
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 2"}
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 2"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 3"}
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 2"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 3"}
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-3, type: file-browser-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-3 2"}
+{"type": "error", "text": "React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. screenId screenid"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 3"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 4"}
+{"type": "debug", "text": "[vite] connecting..."}
+{"type": "debug", "text": "[vite] connected."}
+{"type": "info", "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"type": "log", "text": "Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 1"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 2"}
+{"type": "log", "text": "Focusing window: system-ui-js-window-1 3"}

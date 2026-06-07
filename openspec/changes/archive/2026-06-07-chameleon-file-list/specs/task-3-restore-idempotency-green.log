@@ -1,0 +1,23 @@
+## Task 3 - Restore & Idempotency GREEN
+## Date: 2026-06-06
+
+Test 1: "restores exact geometry after fullscreen toggle"
+Result: PASSED
+
+Window created at x=30, y=30, width=400, height=300 (default stagger).
+Toggle fullscreen ON → OFF:
+- Store geometry restored to exactly x=30, y=30, width=400, height=300 ✓
+- Mechanism: setWindowState saves geometry in savedGeometry before entering fullscreen
+
+Test 2: "fullscreen toggle is idempotent (ON → OFF → ON)"
+Result: PASSED
+
+Toggle sequence: ON → OFF → ON:
+- data-system-ui-fullscreen="true" on frame ✓
+- Computed width=100%, height=100% ✓
+- No state corruption from double toggle ✓
+
+Test Output:
+  ✓ restores exact geometry after fullscreen toggle
+  ✓ fullscreen toggle is idempotent (ON → OFF → ON)
+  14 passed (14)

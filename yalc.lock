@@ -1,0 +1,22 @@
+{
+  "version": "v1",
+  "packages": {
+    "@system-ui-js/file-system-browser-workspace": {
+      "signature": "fc9734cf469741342944b1a2f1e8e86e",
+      "file": true
+    },
+    "@system-ui-js/file-system-plugin-memory": {
+      "signature": "ff15330f74965165e1b45c93e5bf5f5b",
+      "file": true
+    },
+    "@system-ui-js/file-system-browser": {
+      "signature": "6516e16de6cfcdc3d9d1e0df9da5ff7e",
+      "file": true
+    },
+    "@system-ui-js/chameleon": {
+      "signature": "d229ebc08dda1897a865b18c3fb44500",
+      "file": true,
+      "replaced": "0.4.1"
+    }
+  }
+}

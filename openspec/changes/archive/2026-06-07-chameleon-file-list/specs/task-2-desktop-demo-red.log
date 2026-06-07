@@ -1,0 +1,375 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/demo/windows-desktop-demo.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > toggles fullscreen via content fullscreen button
+Creating window: {
+  id: 'system-ui-js-window-19',
+  type: 'demo-window',
+  props: { title: 'Demo Window', content: 'This is a demo window.' },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 30,
+  y: 30,
+  width: 400,
+  height: 300
+} on screen: system-ui-js-window-18
+Focusing window: system-ui-js-window-19 1
+2
+
+stderr | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > toggles fullscreen via content fullscreen button
+Received `true` for a non-boolean attribute `fullscreen`.
+
+If you want to write it to the DOM, pass a string instead: fullscreen="true" or fullscreen={value.toString()}.
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > toggles fullscreen via content fullscreen button
+2
+
+stderr | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > toggles fullscreen via content fullscreen button
+An update to SystemComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DemoBar inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > restores fullscreen window to normal via content restore button
+Creating window: {
+  id: 'system-ui-js-window-22',
+  type: 'demo-window',
+  props: { title: 'Demo Window', content: 'This is a demo window.' },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 30,
+  y: 30,
+  width: 400,
+  height: 300
+} on screen: system-ui-js-window-21
+Focusing window: system-ui-js-window-22 1
+2
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > restores fullscreen window to normal via content restore button
+2
+
+stderr | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > restores fullscreen window to normal via content restore button
+An update to SystemComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DemoBar inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > closes a fullscreen window normally
+Creating window: {
+  id: 'system-ui-js-window-25',
+  type: 'demo-window',
+  props: { title: 'Demo Window', content: 'This is a demo window.' },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 30,
+  y: 30,
+  width: 400,
+  height: 300
+} on screen: system-ui-js-window-24
+Focusing window: system-ui-js-window-25 1
+2
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > closes a fullscreen window normally
+2
+
+stderr | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > closes a fullscreen window normally
+An update to SystemComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DemoBar inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > allows multiple windows to independently toggle fullscreen
+Creating window: {
+  id: 'system-ui-js-window-28',
+  type: 'demo-window',
+  props: { title: 'Demo Window', content: 'This is a demo window.' },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 30,
+  y: 30,
+  width: 400,
+  height: 300
+} on screen: system-ui-js-window-27
+Focusing window: system-ui-js-window-28 1
+2
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > allows multiple windows to independently toggle fullscreen
+Creating window: {
+  id: 'system-ui-js-window-30',
+  type: 'demo-window',
+  props: {
+    title: 'New Window system-ui-js-window-30',
+    content: 'This is a new window.',
+    id: 'system-ui-js-window-30',
+    screenId: 'system-ui-js-window-27'
+  },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 60,
+  y: 60,
+  width: 400,
+  height: 300
+} on screen: system-ui-js-window-27
+Focusing window: system-ui-js-window-30 2
+2
+3
+
+stdout | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > allows multiple windows to independently toggle fullscreen
+2
+3
+
+stderr | src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > allows multiple windows to independently toggle fullscreen
+An update to SystemComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DemoBar inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ScreenComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ❯ src/demo/windows-desktop-demo.test.tsx (10 tests | 4 failed) 232ms
+     × toggles fullscreen via content fullscreen button 18ms
+     × restores fullscreen window to normal via content restore button 16ms
+     × closes a fullscreen window normally 12ms
+     × allows multiple windows to independently toggle fullscreen 20ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > toggles fullscreen via content fullscreen button
+AssertionError: expected null to be 'true' // Object.is equality
+
+- Expected:
+"true"
+
++ Received:
+null
+
+ ❯ src/demo/windows-desktop-demo.test.tsx:130:64
+    128|     await act(async () => fireEvent.click(fullscreenButton));
+    129|     const wrapper = getWindowFrame();
+    130|     expect(wrapper?.getAttribute('data-system-ui-fullscreen')).toBe('t…
+       |                                                                ^
+    131|     const computedStyle = window.getComputedStyle(wrapper as Element);
+    132|     expect(computedStyle.width).toBe('100%');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > restores fullscreen window to normal via content restore button
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/demo/windows-desktop-demo.test.tsx:142:35
+    140|     await act(async () => fireEvent.click(fullscreenButton));
+    141|     let wrapper = getWindowFrame();
+    142|     expect(isFullscreen(wrapper)).toBe(true);
+       |                                   ^
+    143|     const restoreButton = screen.getByLabelText('退出全屏');
+    144|     await act(async () => fireEvent.click(restoreButton));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > closes a fullscreen window normally
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/demo/windows-desktop-demo.test.tsx:160:35
+    158|     await act(async () => fireEvent.click(fullscreenButton));
+    159|     const wrapper = getWindowFrame();
+    160|     expect(isFullscreen(wrapper)).toBe(true);
+       |                                   ^
+    161|     const closeButton = document.querySelector('[aria-label="关闭"]');
+    162|     if (closeButton) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/demo/windows-desktop-demo.test.tsx > WindowsDesktopDemo > allows multiple windows to independently toggle fullscreen
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/demo/windows-desktop-demo.test.tsx:177:39
+    175|     await act(async () => fireEvent.click(fullscreenButtons[0]));
+    176|     const wrappers = getWindowFrames();
+    177|     expect(isFullscreen(wrappers[0])).toBe(true);
+       |                                       ^
+    178|     expect(isFullscreen(wrappers[1])).toBe(false);
+    179|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 6 passed (10)
+   Start at  19:35:01
+   Duration  1.10s (transform 79ms, setup 126ms, import 103ms, tests 232ms, environment 521ms)
+
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

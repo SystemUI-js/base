@@ -1,24 +1,41 @@
 import './styles/base.css';
 
-export {
-  BaseThemeProvider,
-  BaseWindow,
-  BaseWindowActionButton,
-  BaseWindowBody,
-  BaseWindowTitle,
-} from './window';
+export { default as FileManager } from './fileManager';
 
 export {
-  DEFAULT_WINDOW_THEME_CLASS_NAME,
-  WINDOW_THEME_CLASS_NAMES,
-} from './window-theme';
+  clampToRoot,
+  getParentPath,
+  joinPath,
+  normalizePath,
+} from './fileManager/path';
 
 export type {
-  BaseThemeProviderProps,
-  BaseWindowActionButtonProps,
-  BaseWindowBodyProps,
-  BaseWindowProps,
-  BaseWindowTitleProps,
-} from './window';
+  FileManagerDirent,
+  FileManagerDisplayMode,
+  FileManagerEntryInfo,
+  FileManagerInteractionMode,
+  FileManagerMoveContext,
+  FileManagerMoveError,
+  FileManagerMoveErrorReason,
+  FileManagerProps,
+  FileManagerRenderPosition,
+  FileSystemLike,
+} from './fileManager/types';
 
-export type { BaseThemeName, BaseThemeToken } from './window-theme';
+export { default as SystemComponent } from './system';
+
+export {
+  BarPosition,
+  WindowState,
+  barComponentRegistry,
+  generateId,
+  getWindowManagerStore,
+  windowContentRegistry,
+} from './windowManager';
+
+export type {
+  BarListItem,
+  ScreenListItem,
+  WindowListItem,
+  WindowManagerState,
+} from './windowManager';

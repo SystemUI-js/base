@@ -1,0 +1,50 @@
+task-11 OpenSpec scope-check summary
+====================================
+
+Change id: add-file-manager-drag-move
+Created  : openspec/changes/add-file-manager-drag-move/
+
+Artifacts written
+-----------------
+- proposal.md
+- tasks.md  (mirrors 12 plan tasks, one-line each)
+- specs/window-demo-showcase/spec.md       (ADDED Requirements)
+- specs/base-package-distribution/spec.md  (ADDED + MODIFIED Requirements)
+- specs/code-quality-tooling/spec.md       (ADDED Requirements)
+- specs/react-vite-typescript-app/spec.md  (ADDED Requirements)
+
+Scope guarantees
+----------------
+- openspec/specs/ NOT touched           git status --short openspec/specs/ -> 0 lines
+- No source code touched                only files under openspec/changes/add-file-manager-drag-move/
+- Not archived                          change is in openspec/changes/, not openspec/changes/archive/
+- displayMode delta restricted to 'list' | 'icon' — no 'grid' anywhere in deltas
+- sizeRatio delta: caller-defined semantics, clamped to [0, 1], pass-through only, no CSS mapping
+- Drag move delta requires fileSystem.promises.rename(oldPath, newPath)
+- Demo navigation controls scoped to remain OUTSIDE FileManager in both delta capabilities
+- Playwright delta explicitly states it is ADDITIVE to Vitest, not a replacement
+- code-quality-tooling delta: Chromium-only, pw:install + test:e2e scripts, no CI browser cache
+
+Scenario coverage (required by task brief)
+------------------------------------------
+- Happy-path drag-into-folder via rename:
+    window-demo-showcase / Requirement: FileManager 支持拖入文件夹移动条目
+      Scenario: 拖动文件落到目标文件夹后通过 rename 完成移动
+- Invalid-drop graceful no-op (non-folder / same-parent / descendant):
+    window-demo-showcase / Requirement: FileManager 支持拖入文件夹移动条目
+      Scenario: 拖入非文件夹或自身/子孙/同父目录时优雅 no-op
+- Playwright additive to Vitest:
+    code-quality-tooling / Requirement: Playwright 作为 Vitest 之外的追加 E2E 工具层
+      Scenarios: Vitest 与 Playwright 同时存在且职责分离 + 移除 Playwright 不影响 Vitest 主跑器
+
+Validation
+----------
+- Command : npx --yes @fission-ai/openspec validate add-file-manager-drag-move --strict
+- Result  : Change 'add-file-manager-drag-move' is valid   (see task-11-openspec-validate.txt)
+- Iterations: 1 (passed on first run)
+
+Change id file
+--------------
+- Path : .omo/evidence/task-11-change-id.txt
+- Bytes: 26 (no trailing newline)  od -c verified
+- Value: add-file-manager-drag-move

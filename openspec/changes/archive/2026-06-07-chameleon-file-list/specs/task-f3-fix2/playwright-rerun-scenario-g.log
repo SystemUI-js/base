@@ -1,0 +1,40 @@
+# Playwright Re-run: Scenario G - screenId Leak Fix Verification
+# Date: 2026-06-06
+
+## Test: Scenario G - Fullscreen with both window types
+
+Opened Demo window
+Opened File Browser window
+Clicked fullscreen button (1 found)
+
+Console messages captured: 9
+
+*** PASS: Zero React warnings ***
+
+All console messages:
+  [debug] [vite] connecting...
+  [debug] [vite] connected.
+  [info] %cDownload the React DevTools for a better development experience: https://react.dev/font-weight:bold
+  [log] Creating window: {id: system-ui-js-window-1, type: demo-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0
+  [log] Focusing window: system-ui-js-window-1 1
+  [log] Focusing window: system-ui-js-window-1 2
+  [log] Creating window: {id: system-ui-js-window-3, type: file-browser-window, props: Object, zIndex: 1, active: false} on screen: system-ui-js-window-0
+  [log] Focusing window: system-ui-js-window-3 3
+  [log] Focusing window: system-ui-js-window-3 4
+
+## Test: Spot-check Scenario A + F
+
+Scenario A: open + close - OK
+Spot-check A+F: PASS - zero React warnings
+
+## Unit Tests
+
+Test Files  6 passed (6)
+     Tests  66 passed (66)
+  Duration  1.57s
+
+## LSP Diagnostics
+
+No diagnostics found (zero errors on changed file)
+
+## VERDICT: PASS

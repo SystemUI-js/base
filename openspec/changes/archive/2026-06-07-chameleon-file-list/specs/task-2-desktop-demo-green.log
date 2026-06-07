@@ -1,0 +1,13 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/demo/windows-desktop-demo.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  19:36:01
+   Duration  1.14s (transform 76ms, setup 129ms, import 93ms, tests 275ms, environment 531ms)
+
+Done in 1.46s.

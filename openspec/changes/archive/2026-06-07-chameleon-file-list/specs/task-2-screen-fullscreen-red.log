@@ -1,0 +1,68 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/lib/screen/screen.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+stdout | src/lib/screen/screen.test.tsx > ScreenComponent Fullscreen CSS > should apply parent-relative sizing for fullscreen windows
+Creating window: {
+  id: 'test-window-1',
+  type: 'test-window',
+  props: { title: 'Test Window', content: 'Test Content' },
+  zIndex: 1,
+  active: false,
+  alwaysOnTop: false,
+  state: 'normal',
+  x: 30,
+  y: 30,
+  width: 400,
+  height: 300
+} on screen: test-screen
+Focusing window: test-window-1 1
+2
+
+stderr | src/lib/screen/screen.test.tsx > ScreenComponent Fullscreen CSS > should apply parent-relative sizing for fullscreen windows
+React does not recognize the `screenId` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `screenid` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+React does not recognize the `windowProps` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `windowprops` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+Invalid value for prop `store` on <div> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://react.dev/link/attribute-behavior 
+
+stdout | src/lib/screen/screen.test.tsx > ScreenComponent Fullscreen CSS > should apply parent-relative sizing for fullscreen windows
+2
+
+stderr | src/lib/screen/screen.test.tsx > ScreenComponent Fullscreen CSS > should apply parent-relative sizing for fullscreen windows
+Received `true` for a non-boolean attribute `fullscreen`.
+
+If you want to write it to the DOM, pass a string instead: fullscreen="true" or fullscreen={value.toString()}.
+
+ ❯ src/lib/screen/screen.test.tsx (2 tests | 1 failed) 130ms
+     × should apply parent-relative sizing for fullscreen windows 57ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/screen/screen.test.tsx > ScreenComponent Fullscreen CSS > should apply parent-relative sizing for fullscreen windows
+AssertionError: expected null to be truthy
+
+- Expected:
+true
+
++ Received:
+null
+
+ ❯ src/lib/screen/screen.test.tsx:88:29
+     86|
+     87|     const fullscreenFrame = document.querySelector('[data-system-ui-fu…
+     88|     expect(fullscreenFrame).toBeTruthy();
+       |                             ^
+     89|     expect(fullscreenFrame?.getAttribute('data-system-ui-fullscreen'))…
+     90|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  19:34:58
+   Duration  973ms (transform 47ms, setup 131ms, import 55ms, tests 130ms, environment 538ms)
+
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

@@ -1,0 +1,31 @@
+=== Command: yarn test src/lib/fileManager/fileManager.test.tsx --run ===
+Exit code: 0
+Elapsed: 1s
+--- Last 20 lines ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest src/lib/fileManager/fileManager.test.tsx --run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  26 passed (26)
+   Start at  10:37:14
+   Duration  1.04s (transform 70ms, setup 133ms, import 96ms, tests 177ms, environment 525ms)
+
+Done in 1.35s.
+--- Full output below ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest src/lib/fileManager/fileManager.test.tsx --run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  26 passed (26)
+   Start at  10:37:14
+   Duration  1.04s (transform 70ms, setup 133ms, import 96ms, tests 177ms, environment 525ms)
+
+Done in 1.35s.

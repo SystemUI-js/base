@@ -1,0 +1,23 @@
+=== Command: yarn pw:install ===
+Exit code: 1
+Elapsed: 0s
+--- Last 20 lines ---
+yarn run v1.22.22
+warning package.json: No license field
+$ playwright install --with-deps chromium
+BEWARE: your OS is not officially supported by Playwright; installing dependencies for ubuntu26.04-x64 as a fallback.
+Cannot install dependencies for ubuntu26.04-x64 with Playwright 1.60.0!
+Failed to install browsers
+Error: ERROR: Playwright does not support chromium on ubuntu26.04-x64
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+--- Full output below ---
+yarn run v1.22.22
+warning package.json: No license field
+$ playwright install --with-deps chromium
+BEWARE: your OS is not officially supported by Playwright; installing dependencies for ubuntu26.04-x64 as a fallback.
+Cannot install dependencies for ubuntu26.04-x64 with Playwright 1.60.0!
+Failed to install browsers
+Error: ERROR: Playwright does not support chromium on ubuntu26.04-x64
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
