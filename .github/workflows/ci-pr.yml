@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   pr-checks:
-    name: Lint, Build and Pack
+    name: Lint, Test, Build and Pack
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,6 +32,9 @@ jobs:
 
       - name: Run lint
         run: yarn lint
+
+      - name: Run tests
+        run: yarn test --runInBand
 
       - name: Run build
         run: yarn build

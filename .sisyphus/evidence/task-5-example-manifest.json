@@ -1,0 +1,29 @@
+{
+  "task": "task-5-example-manifest",
+  "status": "passed",
+  "artifacts": [
+    "example/package.json",
+    "example/App.tsx",
+    "example/app.json",
+    "example/babel.config.js",
+    "example/tsconfig.json",
+    "example/yarn.lock"
+  ],
+  "checks": {
+    "filesExist": true,
+    "privateManifest": true,
+    "usesFileDependency": true,
+    "noExpoRouter": true,
+    "noDeepImports": true,
+    "frozenInstall": true,
+    "exampleBuild": true,
+    "exampleTypecheck": true,
+    "rootLibraryBuild": true
+  },
+  "notes": [
+    "example/package.json keeps react-dom only as peer-compatibility plumbing for the current root package contract.",
+    "example prestart/prebuild rebuild the root library and force-refresh the file:.. snapshot before Expo commands.",
+    "root tsconfig.lib.json excludes *.test.* files so build:lib remains publish-surface focused.",
+    "lsp_diagnostics could not be used because the workspace biome server is not installed; build and TypeScript checks were used for verification instead."
+  ]
+}

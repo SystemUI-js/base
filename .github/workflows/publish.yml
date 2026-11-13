@@ -69,6 +69,12 @@ jobs:
         if: steps.metadata.outputs.should_publish == 'true'
         run: yarn build
 
+      - name: Note example smoke validation
+        if: steps.metadata.outputs.should_publish == 'true'
+        run: |
+          echo "Example Expo export smoke ran as part of yarn build."
+          echo "Only the root package will be published."
+
       - name: Publish package
         if: steps.metadata.outputs.should_publish == 'true'
         env:

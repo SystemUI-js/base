@@ -1,0 +1,41 @@
+Task 6 verification evidence
+
+Environment
+- PATH prefixed with: $HOME/.nvm/versions/node/v24.15.0/bin
+- Package manager: yarn 1.22.22
+
+Lint
+- Command: yarn lint
+- Result: success
+
+Tests
+- Command: yarn test --runInBand
+- Result: success
+- Suites: 2 passed, 2 total
+- Tests: 6 passed, 6 total
+
+Build
+- Command: yarn build
+- Result: success
+- Library build emitted: dist/index.js
+- Example smoke ran during build via Expo export
+
+Pack
+- Command: yarn pack --filename package.tgz
+- Result: success
+
+Example smoke exports
+- Command: yarn --cwd example expo export --platform ios --output-dir dist-example-ios
+- Result: success
+- Output: example/dist-example-ios
+
+- Command: yarn --cwd example expo export --platform android --output-dir dist-example-android
+- Result: success
+- Output: example/dist-example-android
+
+LSP diagnostics
+- No warning/error diagnostics on changed TypeScript/JavaScript files checked with lsp_diagnostics.
+- YAML and JSON LSP checks were unavailable in this environment because `yaml-language-server` and `biome` are not installed.
+
+Follow-up verification
+- After restoring `example` prebuild dependency refresh hooks, `yarn build` succeeded again and exported both native smoke bundles.

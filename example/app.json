@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "@system-ui-js/base Example",
+    "slug": "system-ui-js-base-example",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

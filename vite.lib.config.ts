@@ -16,7 +16,12 @@ export default defineConfig({
       cssFileName: 'styles',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@system-ui-js/chameleon'],
+      external: [
+        'react',
+        'react-dom',
+        'react-native',
+        '@system-ui-js/chameleon',
+      ],
     },
   },
 });

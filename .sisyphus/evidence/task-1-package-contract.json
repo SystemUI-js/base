@@ -1,0 +1,33 @@
+{
+  "task": "task-1-package-contract",
+  "package": "@system-ui-js/base",
+  "description": "System UI 基础包",
+  "dependencyVersion": "0.3.0",
+  "peerDependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-native": ">=0.74"
+  },
+  "exports": [
+    "."
+  ],
+  "scripts": {
+    "build": "yarn build:lib && yarn build:example",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:example": "yarn --cwd example expo export --platform ios --output-dir dist-example-ios && yarn --cwd example expo export --platform android --output-dir dist-example-android"
+  },
+  "removedScripts": [
+    "dev:demo",
+    "build:demo",
+    "preview:demo"
+  ],
+  "verification": {
+    "dependencyAndExportsCheck": "passed",
+    "scriptContractCheck": "passed",
+    "frozenLockfileCheck": {
+      "status": "passed",
+      "command": "PATH=/home/zhangxiao/.nvm/versions/node/v24.15.0/bin:$PATH yarn install --frozen-lockfile",
+      "note": "Default session Node v23.11.1 fails a transitive engine check in eslint-visitor-keys@5.0.1; Node v24.15.0 satisfies the published engine range."
+    }
+  }
+}

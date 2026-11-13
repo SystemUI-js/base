@@ -1,17 +1,17 @@
 ## Purpose
 
-定义仓库级 GitHub Actions 自动化能力，确保 Pull Request 校验与版本分支发布流程具备一致、可重复执行的自动化规范。
+定义仓库级 GitHub Actions 自动化能力，确保 Pull Request 校验与版本分支发布流程在 Expo Native 迁移后仍具备一致、可重复执行的自动化规范。
 
 ## Requirements
 
 ### Requirement: Pull request validation workflow
 
-仓库 SHALL 在面向 `main` 或 `dev` 的 Pull Request 场景下提供统一的 GitHub Actions 校验流程，并使用当前仓库已稳定存在的 yarn 脚本完成依赖安装、静态检查、构建与发布前打包校验。
+仓库 SHALL 在面向 `main` 或 `dev` 的 Pull Request 场景下提供统一的 GitHub Actions 校验流程，并使用当前仓库已稳定存在的 Yarn 脚本完成依赖安装、静态检查、包装层回归测试、构建与发布前打包校验。
 
 #### Scenario: Validate a pull request with repository checks
 
 - **WHEN** 维护者创建或更新目标分支为 `main` 或 `dev` 的 Pull Request
-- **THEN** 系统 MUST 通过 GitHub Actions 执行代码拉取、Node 20 环境准备、`yarn install --frozen-lockfile`、`yarn lint`、`yarn build` 与 `yarn pack`
+- **THEN** 系统 MUST 通过 GitHub Actions 执行代码拉取、Node 20 环境准备、`yarn install --frozen-lockfile`、`yarn lint`、`yarn test --runInBand`、`yarn build` 与 `yarn pack`
 
 ### Requirement: Pull request validation keeps only the latest run
 
@@ -24,9 +24,9 @@
 
 ### Requirement: Version branch publish workflow is available
 
-仓库 SHALL 提供独立于 Pull Request 校验的 GitHub Actions 发布工作流，用于响应 `version/*` 分支推送并显式依赖 npm Registry 鉴权配置。
+仓库 SHALL 提供独立于 Pull Request 校验的 GitHub Actions 发布工作流，用于响应 `version/*` 分支推送、在发布前运行迁移后的构建与 Native 示例 smoke validation，并显式依赖 npm Registry 鉴权配置。
 
 #### Scenario: Trigger publish workflow from a version branch
 
 - **WHEN** 维护者向 `version/*` 分支推送代码
-- **THEN** 系统 MUST 启动独立的发布工作流，并使用仓库配置的 `NPM_TOKEN` 作为 npm Registry 鉴权凭据
+- **THEN** 系统 MUST 启动独立的发布工作流，使用仓库配置的 `NPM_TOKEN` 作为 npm Registry 鉴权凭据，并且只发布根包而不发布私有 `example/`
