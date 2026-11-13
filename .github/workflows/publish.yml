@@ -1,9 +1,10 @@
-name: Publish to npm
+name: Publish to npm (tags)
 
 on:
   push:
-    branches:
-      - 'version/*'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -25,12 +26,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24.15.0
           cache: yarn
           registry-url: https://registry.npmjs.org
 
+      # Tag and package versions must agree before any install/build/publish.
+      - name: Validate release tag and classify dist-tag
+        shell: bash
+        run: node .github/scripts/release-metadata.cjs validate "${GITHUB_REF#refs/tags/}" package.json
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: |
+          corepack enable
+          yarn --version
+          yarn install --frozen-lockfile
 
       - name: Read package metadata and publish plan
         id: metadata
@@ -38,23 +47,14 @@ jobs:
         run: |
           set -euo pipefail
 
-          BRANCH="${GITHUB_REF#refs/heads/}"
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          PUBLISH_TAG="latest"
-
-          if [[ "$PACKAGE_VERSION" == *-dev* ]]; then
-            PUBLISH_TAG="dev"
-          elif [[ "$PACKAGE_VERSION" == *-beta* ]]; then
-            PUBLISH_TAG="beta"
-          fi
-
           SHOULD_PUBLISH="true"
           if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version > /dev/null 2>&1; then
             SHOULD_PUBLISH="false"
           fi
 
-          echo "Detected branch: $BRANCH"
+          echo "Detected tag: $GITHUB_REF_NAME"
           echo "Package: $PACKAGE_NAME"
           echo "Version: $PACKAGE_VERSION"
           echo "Publish tag: $PUBLISH_TAG"
