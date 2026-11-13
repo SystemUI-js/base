@@ -4,3 +4,5 @@ dist-demo/
 .history/
 *.tsbuildinfo
 package-lock.json
+.omo/
+.yalc/

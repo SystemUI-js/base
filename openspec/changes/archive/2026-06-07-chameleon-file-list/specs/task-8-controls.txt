@@ -1,0 +1,13 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest src/demo/file-browser-window.test.tsx --run -t 'outside the FileManager list'
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 6 skipped (7)
+   Start at  10:26:36
+   Duration  970ms (transform 76ms, setup 127ms, import 115ms, tests 80ms, environment 531ms)
+
+Done in 1.30s.

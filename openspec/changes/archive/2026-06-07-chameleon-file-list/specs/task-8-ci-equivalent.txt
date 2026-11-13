@@ -1,0 +1,89 @@
+=== Task 8: Full Verification ===
+
+Date: 2026-06-03T17:54:22+08:00
+
+=== yarn build ===
+yarn run v1.22.22
+warning package.json: No license field
+$ yarn build:lib && yarn build:demo
+warning package.json: No license field
+$ vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json
+vite v8.0.13 building client environment for production...
+[33mWarning: Invalid output options (1 issue found)
+- For the "generatedCode.constBindings". Invalid key: Expected never but received "constBindings". [0m
+[2Ktransforming...✓ 13 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/styles.css   4.03 kB │ gzip: 1.25 kB
+dist/index.js    15.64 kB │ gzip: 5.41 kB │ map: 44.84 kB
+
+✓ built in 29ms
+warning package.json: No license field
+$ tsc -p tsconfig.app.json && vite build --config vite.config.ts
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 33 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-demo/index.html                   0.41 kB │ gzip:   0.27 kB
+dist-demo/assets/index-Dv0qHHQt.css  103.51 kB │ gzip:  14.23 kB
+dist-demo/assets/index-D5epjvom.js   347.86 kB │ gzip: 110.22 kB
+
+✓ built in 205ms
+Done in 2.13s.
+BUILD: PASS
+
+=== FileManager Tests ===
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/lib/fileManager/fileManager.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  17:54:46
+   Duration  949ms (transform 50ms, setup 129ms, import 69ms, tests 104ms, environment 523ms)
+
+Done in 1.30s.
+FILEMANAGER TESTS: PASS
+
+=== Demo Tests ===
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/demo/file-browser-window.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  17:54:49
+   Duration  1.03s (transform 60ms, setup 132ms, import 72ms, tests 180ms, environment 521ms)
+
+Done in 1.36s.
+DEMO TESTS: PASS
+
+=== Path Helper Tests ===
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/lib/fileManager/path.test.ts
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  21 passed (21)
+   Start at  17:55:02
+   Duration  810ms (transform 32ms, setup 126ms, import 19ms, tests 6ms, environment 546ms)
+
+Done in 1.15s.
+PATH TESTS: PASS
+
+=== Git Diff Summary ===
+ src/demo/file-browser-window.tsx  | 223 +++++++++++-------------
+ src/demo/windows-desktop-demo.tsx |   4 +-
+ src/lib/index.ts                  |  34 +++-
+ yalc.lock                         |  10 +-
+ yarn.lock                         | 349 ++++++++++++++++++++++++++++++++++----
+ 5 files changed, 445 insertions(+), 175 deletions(-)

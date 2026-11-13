@@ -1,0 +1,10 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ playwright test e2e/file-manager-drag.e2e.ts --grep 'invalid path'
+
+Running 1 test using 1 worker
+
+  ✓  1 [chromium] › e2e/file-manager-drag.e2e.ts:144:3 › FileManager 拖拽移动 › invalid path：拖到另一个文件上时，原文件保留在原目录 (580ms)
+
+  1 passed (1.2s)
+Done in 1.75s.

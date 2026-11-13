@@ -1,0 +1,17 @@
+## Task 3 - Resize Disabled GREEN
+## Date: 2026-06-06
+
+Test: "fullscreen disables resize handles"
+Result: PASSED
+
+Mechanism: Two layers of defense:
+1. Chameleon's CWindow.renderResizeHandles() returns null when isFullscreen() (line 8522-8523)
+2. ScreenComponent passes resizable={false} when fullscreen (explicit override for defense-in-depth)
+
+After toggling fullscreen via aria-label "全屏":
+- document.querySelectorAll('[data-testid^="window-resize-"]').length === 0 ✓
+- Frame has data-system-ui-fullscreen="true" ✓
+
+Test Output:
+  ✓ fullscreen disables resize handles
+  14 passed (14)

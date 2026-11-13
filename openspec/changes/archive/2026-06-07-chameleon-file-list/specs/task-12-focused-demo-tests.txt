@@ -1,0 +1,31 @@
+=== Command: yarn test src/demo/file-browser-window.test.tsx --run ===
+Exit code: 0
+Elapsed: 1s
+--- Last 20 lines ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest src/demo/file-browser-window.test.tsx --run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  10:37:21
+   Duration  1.10s (transform 73ms, setup 125ms, import 102ms, tests 198ms, environment 526ms)
+
+Done in 1.40s.
+--- Full output below ---
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest src/demo/file-browser-window.test.tsx --run
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  10:37:21
+   Duration  1.10s (transform 73ms, setup 125ms, import 102ms, tests 198ms, environment 526ms)
+
+Done in 1.40s.

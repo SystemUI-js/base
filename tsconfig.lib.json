@@ -9,5 +9,6 @@
     "rootDir": "./src/lib",
     "outDir": "./dist"
   },
-  "include": ["src/lib/**/*"]
+  "include": ["src/lib/**/*"],
+  "exclude": ["src/lib/**/*.test.ts", "src/lib/**/*.test.tsx"]
 }

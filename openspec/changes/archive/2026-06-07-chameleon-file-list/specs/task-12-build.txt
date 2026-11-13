@@ -1,0 +1,57 @@
+=== Command: yarn build ===
+Exit code: 0
+Elapsed: 2s
+--- Last 20 lines ---
+dist/index.js    19.05 kB │ gzip: 6.50 kB │ map: 55.53 kB
+
+✓ built in 28ms
+warning package.json: No license field
+$ tsc -p tsconfig.app.json && vite build --config vite.config.ts
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 32 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-demo/index.html                   0.41 kB │ gzip:   0.28 kB
+dist-demo/assets/index-CzNvYcZX.css  131.13 kB │ gzip:  17.51 kB
+dist-demo/assets/index-bbq3CCxr.js   522.57 kB │ gzip: 166.16 kB
+
+✓ built in 372ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Done in 2.25s.
+--- Full output below ---
+yarn run v1.22.22
+warning package.json: No license field
+$ yarn build:lib && yarn build:demo
+warning package.json: No license field
+$ vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json
+vite v8.0.13 building client environment for production...
+[33mWarning: Invalid output options (1 issue found)
+- For the "generatedCode.constBindings". Invalid key: Expected never but received "constBindings". [0m
+[2Ktransforming...✓ 13 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/styles.css   4.55 kB │ gzip: 1.37 kB
+dist/index.js    19.05 kB │ gzip: 6.50 kB │ map: 55.53 kB
+
+✓ built in 28ms
+warning package.json: No license field
+$ tsc -p tsconfig.app.json && vite build --config vite.config.ts
+vite v8.0.13 building client environment for production...
+[2Ktransforming...✓ 32 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-demo/index.html                   0.41 kB │ gzip:   0.28 kB
+dist-demo/assets/index-CzNvYcZX.css  131.13 kB │ gzip:  17.51 kB
+dist-demo/assets/index-bbq3CCxr.js   522.57 kB │ gzip: 166.16 kB
+
+✓ built in 372ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Done in 2.25s.

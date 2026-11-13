@@ -1,0 +1,13 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ vitest run src/lib/screen/screen.test.tsx
+
+ RUN  v4.1.6 /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  19:35:58
+   Duration  987ms (transform 48ms, setup 132ms, import 67ms, tests 137ms, environment 538ms)
+
+Done in 1.32s.

@@ -1,0 +1,12 @@
+=== Command: yarn pack --filename package.tgz && rm -f package.tgz ===
+Exit code: 0
+Elapsed: 0s
+--- Output ---
+yarn pack v1.22.22
+warning package.json: No license field
+warning package.json: No license field
+success Wrote tarball to "package.tgz".
+Done in 0.12s.
+CONFIRMED: no tarball remains
+--- Tarball cleanup check ---
+CONFIRMED: package.tgz does NOT exist in worktree

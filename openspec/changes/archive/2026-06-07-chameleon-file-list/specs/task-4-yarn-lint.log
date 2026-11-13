@@ -1,0 +1,385 @@
+yarn run v1.22.22
+$ eslint .
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.rollup.cache/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/dist/windowManager/index.js
+  20:1  error  Definition for rule '@typescript-eslint/no-explicit-any' was not found  @typescript-eslint/no-explicit-any
+  22:1  error  Definition for rule '@typescript-eslint/no-explicit-any' was not found  @typescript-eslint/no-explicit-any
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Button/Button.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Button/Button.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ButtonGroup/ButtonGroup.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ButtonGroup/ButtonGroup.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ButtonSeparator/ButtonSeparator.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ButtonSeparator/ButtonSeparator.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CList/CList.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CList/CList.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CList/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CList/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CListIcon/CListIcon.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CListIcon/CListIcon.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CListIcon/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CListIcon/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CLoading/CLoading.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CLoading/CLoading.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CLoading/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CLoading/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSlider/CSlider.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSlider/CSlider.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSlider/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSlider/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSplitArea/CSplitArea.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSplitArea/CSplitArea.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSplitArea/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/CSplitArea/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Checkbox/Checkbox.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Checkbox/Checkbox.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Dock/Dock.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Dock/Dock.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Dock/dockLayout.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Dock/dockLayout.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Grid/Grid.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Grid/Grid.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Grid/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Grid/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/Icon.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/Icon.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/IconContainer.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/IconContainer.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Icon/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Input/CInput.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Input/CInput.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Input/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Input/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Manager/isManagedConstructor.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Manager/isManagedConstructor.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Menu/Menu.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Menu/Menu.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Radio/Radio.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Radio/Radio.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Radio/RadioGroup.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Radio/RadioGroup.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Screen/Screen.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Screen/Screen.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Screen/ScreenManager.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Screen/ScreenManager.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollArea.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollArea.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollbarHorizontal.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollbarHorizontal.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollbarVertical.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/ScrollbarVertical.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/scrollMetrics.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/scrollMetrics.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/useScrollbarDrag.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/ScrollArea/useScrollbarDrag.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Select/Select.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Select/Select.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StartBar/StartBar.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StartBar/StartBar.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/StatusBar.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/StatusBar.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/StatusBarItem.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/StatusBarItem.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/StatusBar/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Switch/Switch.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Switch/Switch.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/CTab.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/CTab.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/CTabItem.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/CTabItem.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tab/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Table/CTable.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Table/CTable.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Table/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Table/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/ResolvedThemeClassName.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/ResolvedThemeClassName.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/Theme.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/Theme.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/mergeClasses.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/mergeClasses.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/normalizeThemeClassName.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/normalizeThemeClassName.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/themeName.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/themeName.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/useTheme.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Theme/useTheme.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/TimePicker/CTimePicker.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/TimePicker/CTimePicker.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/TimePicker/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/TimePicker/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tooltip/CTooltip.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tooltip/CTooltip.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tooltip/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tooltip/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Transfer/CTransfer.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Transfer/CTransfer.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Transfer/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Transfer/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tree/CTree.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tree/CTree.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tree/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Tree/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Widget/Widget.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Widget/Widget.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/Window.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/Window.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowBody.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowBody.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowManager.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowManager.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowTitle.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/WindowTitle.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/Window/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/components/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/ComponentCatalog.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/ComponentCatalog.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/ShowcaseCodeDisclosure.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/ShowcaseCodeDisclosure.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/commonControlsPreview.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/commonControlsPreview.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/main.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/main.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/commonControlsHarness.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/commonControlsHarness.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/harnessRoute.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/harnessRoute.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/menuHarness.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/menuHarness.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/scrollAreaHarness.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/scrollAreaHarness.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/windowHarness.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/playwright/windowHarness.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/themeSwitcher.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/dev/themeSwitcher.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/default/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/default/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/types.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/types.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/win7/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/win7/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/win98/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/win98/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/winxp/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/theme/winxp/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/utils/uuid.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/chameleon/dist/utils/uuid.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/file-system.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/file-system.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/fs.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/fs.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/indexeddb.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/indexeddb.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/memory.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/memory.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/webdav.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/plugins/webdav.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/sort-db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/sort-db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/sort.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/dist/sort.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/file-system.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/file-system.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/fs.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/fs.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/sort-db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/sort-db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/sort.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/dist/sort.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/db.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/db.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/file-system.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/file-system.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/fs.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/fs.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/index.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/index.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/sort-db.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/sort-db.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/sort.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/sort.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/types/webdav.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/core/src/types/webdav.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-indexeddb/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-indexeddb/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-indexeddb/src/index.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-indexeddb/src/index.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-memory/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-memory/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-memory/src/index.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-memory/src/index.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/index.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/index.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/types/webdav.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/types/webdav.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/webdav-web.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/packages/plugin-webdav/src/webdav-web.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/playwright.config.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/playwright.config.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/vitest.config.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/vitest.config.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/vitest.setup.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser-workspace/vitest.setup.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/file-system.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/file-system.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/fs.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/fs.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/sort-db.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/sort-db.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/sort.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-browser/dist/sort.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+/home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-plugin-memory/dist/index.d.ts
+  0:0  error  Parsing error: /home/zhangxiao/frontend/worktrees/SysUIBase/feature-init-framework/.yalc/@system-ui-js/file-system-plugin-memory/dist/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject
+
+✖ 127 problems (127 errors, 0 warnings)
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

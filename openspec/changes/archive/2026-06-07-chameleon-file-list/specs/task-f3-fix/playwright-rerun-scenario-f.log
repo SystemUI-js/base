@@ -1,0 +1,23 @@
+Scenario F and G Playwright re-verification log
+=============================================
+Date: 2026-06-06
+Tool: Playwright (headless Chromium)
+
+=== Scenario F: Fullscreen close button ===
+PASS: Found 1 fullscreen element(s) after clicking 全屏 button
+PASS: Fullscreen window closed successfully after clicking close button
+PASS: Launcher button position: x=0, y=0 (top-left, not overlapping close button zone)
+
+=== Scenario G: No DOM warning ===
+PASS: No 'non-boolean attribute fullscreen' warnings in console
+
+=== Console messages (7 total) ===
+[debug] [vite] connecting...
+[debug] [vite] connected.
+[info] %cDownload the React DevTools...
+[log] Creating window: {id: system-ui-js-window-1, type: demo-window, ...}
+[log] Focusing window: system-ui-js-window-1 1
+[log] Focusing window: system-ui-js-window-1 2
+[log] Focusing window: system-ui-js-window-1 3
+
+=== ALL SCENARIOS PASSED ===

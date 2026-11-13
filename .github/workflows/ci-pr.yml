@@ -33,8 +33,17 @@ jobs:
       - name: Run lint
         run: yarn lint
 
+      - name: Run tests
+        run: yarn test:run
+
       - name: Run build
         run: yarn build
+
+      - name: Install Playwright browsers
+        run: yarn pw:install
+
+      - name: Run E2E tests
+        run: yarn test:e2e
 
       - name: Verify yarn pack
         run: yarn pack --filename package.tgz && rm -f package.tgz
