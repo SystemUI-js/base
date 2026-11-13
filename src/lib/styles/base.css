@@ -1,3 +1,27 @@
+.sb-window-manager-host {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.sb-window-manager-host > * {
+  pointer-events: auto;
+}
+
+.sb-window-manager-window {
+  position: absolute;
+}
+
+.sb-window-manager-window[data-window-state="minimized"] {
+  display: none !important;
+}
+
+.sb-window-manager-status-bar {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
 .sb-base-window-shell {
   display: flex;
   flex-direction: column;

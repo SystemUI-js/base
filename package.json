@@ -7,6 +7,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "style": "./dist/style.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -28,10 +29,16 @@
     "build:demo": "tsc -p tsconfig.app.json && vite build --config vite.config.ts",
     "preview:demo": "vite preview --config vite.config.ts",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
-    "@system-ui-js/chameleon": "0.2.0"
+    "@system-ui-js/chameleon": "file:.yalc/@system-ui-js/chameleon",
+    "@system-ui-js/file-system-browser": "file:.yalc/@system-ui-js/file-system-browser",
+    "@system-ui-js/file-system-browser-workspace": "file:.yalc/@system-ui-js/file-system-browser-workspace",
+    "@system-ui-js/file-system-plugin-memory": "file:.yalc/@system-ui-js/file-system-plugin-memory",
+    "zustand": "^5.0.14"
   },
   "peerDependencies": {
     "react": "^19.2.5",
@@ -39,6 +46,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -48,11 +61,15 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "jsdom": "^29.1.1",
     "prettier": "^3.8.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "rollup": "^4.61.0",
+    "rollup-plugin-css-only": "^4.5.5",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
-    "vite": "^8.0.8"
+    "vite": "^8.0.8",
+    "vitest": "^4.1.6"
   }
 }

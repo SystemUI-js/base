@@ -1,0 +1,80 @@
+/**
+ * FileManager 组件样式
+ *
+ * 类名前缀：system-ui-js__file-manager-
+ */
+
+/* 根容器 */
+.system-ui-js__file-manager {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+/* 单个文件/目录项 */
+.system-ui-js__file-manager-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 选中态 */
+.system-ui-js__file-manager-item--selected {
+    background-color: var(--cm-primary-bg, #e0e7ff);
+    color: var(--cm-primary-text, #1e3a8a);
+}
+
+/* 目录项 */
+.system-ui-js__file-manager-item--directory {
+    font-weight: 500;
+}
+
+/* 文件项 */
+.system-ui-js__file-manager-item--file {
+    font-weight: 400;
+}
+
+/* 图标 */
+.system-ui-js__file-manager-item__icon {
+    flex-shrink: 0;
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* 名称 */
+.system-ui-js__file-manager-item__name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* 状态栏（加载/错误/空态共用容器） */
+.system-ui-js__file-manager-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* 加载态 */
+.system-ui-js__file-manager-status__loading {
+    color: var(--cm-text-secondary, #6b7280);
+}
+
+/* 错误态 */
+.system-ui-js__file-manager-status__error {
+    color: var(--cm-error, #dc2626);
+}
+
+/* 空态 */
+.system-ui-js__file-manager-status__empty {
+    color: var(--cm-text-tertiary, #9ca3af);
+}
